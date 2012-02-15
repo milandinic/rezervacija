@@ -1,0 +1,22 @@
+body,p,li,a {
+	font-family: georgia, times, serif;
+	font-size: 13pt;
+}
+
+h1,h2,h3 {
+	font-family: 'Yanone Kaffeesatz', arial, serif;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+form div div input {
+	left: 200px;
+	position: fixed;
+}
+
+form div div {
+	margin: 5px;
+}
