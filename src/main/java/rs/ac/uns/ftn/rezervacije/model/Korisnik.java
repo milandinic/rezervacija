@@ -2,12 +2,30 @@ package rs.ac.uns.ftn.rezervacije.model;
 
 public class Korisnik extends AbstractPersistable {
 
+    public static final String TIP = "tipKorisnika";
+    public static final String IME = "korisnickoIme";
+    public static final String LOZINKA = "ime";
+    public static final String KORISNICKO_IME = "ime";
+
     private static final long serialVersionUID = 7205369385038938219L;
+
+    private String ime;
 
     private String korisnickoIme;
     private String lozinka;
-    private String ime;
     private TipKorisnika tipKorisnika;
+
+    public Korisnik() {
+        super();
+    }
+
+    public Korisnik(String ime, String korisnickoIme, String lozinka, Long id) {
+        super(id);
+        this.ime = ime;
+        this.korisnickoIme = korisnickoIme;
+        this.lozinka = lozinka;
+        this.tipKorisnika = TipKorisnika.KUPAC;
+    }
 
     public String getIme() {
         return ime;

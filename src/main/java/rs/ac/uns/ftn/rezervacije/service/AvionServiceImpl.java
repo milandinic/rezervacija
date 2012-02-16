@@ -6,13 +6,13 @@ import java.util.List;
 
 import rs.ac.uns.ftn.rezervacije.model.Avion;
 
-public class AeroplaneServiceImpl implements AeroplaneService, Serializable {
+public class AvionServiceImpl implements AvionService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private final List<Avion> list = new ArrayList<Avion>();
 
-    public AeroplaneServiceImpl() {
+    public AvionServiceImpl() {
         super();
         list.add(new Avion(100, "Boing 741", 1L));
         list.add(new Avion(50, "Boing 742", 2L));

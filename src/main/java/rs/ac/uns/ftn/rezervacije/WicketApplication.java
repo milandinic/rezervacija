@@ -2,8 +2,12 @@ package rs.ac.uns.ftn.rezervacije;
 
 import org.apache.wicket.protocol.http.WebApplication;
 
+import rs.ac.uns.ftn.rezervacije.stranice.admin.aerodrom.AerodromListaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.admin.aerodrom.AerodromPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.avion.AvionListaPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.avion.AvionPage;
+import rs.ac.uns.ftn.rezervacije.stranice.admin.korisnik.KorisnikListaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.admin.korisnik.KorisnikPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.login.PrijavaPage;
 
 /**
@@ -30,8 +34,15 @@ public class WicketApplication extends WebApplication {
 
         mountPage("home", HomePage.class);
         mountPage("admin-prijava", PrijavaPage.class);
+
         mountPage("avioni", AvionListaPage.class);
         mountPage("avion", AvionPage.class);
+        mountPage("aerodromi", AerodromListaPage.class);
+        mountPage("aerodrom", AerodromPage.class);
+
+        mountPage("korisnici", KorisnikListaPage.class);
+        mountPage("korisnik", KorisnikPage.class);
+
         // add your configuration here
 
         // getApplicationSettings().setInternalErrorPage(ErrorPage.class);

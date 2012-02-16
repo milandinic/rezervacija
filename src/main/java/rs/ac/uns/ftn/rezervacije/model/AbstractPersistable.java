@@ -5,6 +5,8 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public abstract class AbstractPersistable implements Serializable {
 
+    public static final String ID = "id";
+
     private Long id;
 
     public AbstractPersistable() {
