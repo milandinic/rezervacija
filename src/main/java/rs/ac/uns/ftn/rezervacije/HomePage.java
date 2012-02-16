@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import rs.ac.uns.ftn.rezervacije.stranice.admin.avion.AvionListaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.admin.avion.AvionPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.login.PrijavaPage;
 
 public class HomePage extends WebPage {
@@ -14,5 +15,6 @@ public class HomePage extends WebPage {
         // TODO Add your page's components here
         add(new BookmarkablePageLink<PrijavaPage>("admin-prijava", PrijavaPage.class));
         add(new BookmarkablePageLink<PrijavaPage>("avioni", AvionListaPage.class));
+        add(new BookmarkablePageLink<PrijavaPage>("avion", AvionPage.class));
     }
 }

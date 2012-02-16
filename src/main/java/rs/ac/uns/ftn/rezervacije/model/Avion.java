@@ -10,6 +10,10 @@ public class Avion extends AbstractPersistable {
     private Integer kapacitet;
     private String naziv;
 
+    public Avion() {
+        super();
+    }
+
     public Avion(Integer kapacitet, String naziv, Long id) {
         super(id);
         this.kapacitet = kapacitet;
