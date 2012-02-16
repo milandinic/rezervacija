@@ -12,7 +12,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import rs.ac.uns.ftn.rezervacije.model.Avion;
 import rs.ac.uns.ftn.rezervacije.service.AeroplaneService;
 import rs.ac.uns.ftn.rezervacije.service.AeroplaneServiceImpl;
-import rs.ac.uns.ftn.rezervacije.stranice.AbstractRezervacijaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.admin.AbstractAdminPage;
 
 import com.inmethod.grid.DataProviderAdapter;
 import com.inmethod.grid.IGridColumn;
@@ -20,7 +20,7 @@ import com.inmethod.grid.column.PropertyColumn;
 import com.inmethod.grid.datagrid.DataGrid;
 import com.inmethod.grid.datagrid.DefaultDataGrid;
 
-public class AvionListaPage extends AbstractRezervacijaPage {
+public class AvionListaPage extends AbstractAdminPage {
 
     private static final long serialVersionUID = -820528739421089772L;
 
@@ -55,8 +55,7 @@ public class AvionListaPage extends AbstractRezervacijaPage {
 
             @Override
             public void onClick() {
-                // TODO Auto-generated method stub
-
+                setResponsePage(AvionPage.class);
             }
 
         });
