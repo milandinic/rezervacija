@@ -19,11 +19,25 @@ public class AeroplaneServiceImpl implements AeroplaneService, Serializable {
         list.add(new Avion(10, "Boing 747", 3L));
     }
 
-    public List<Avion> getListOfAvion() {
+    public void create(Avion object) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void deleteById(long id) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public Avion getById(long id) {
+        return new Avion(100, "Boing 741", id);
+    }
+
+    public List<Avion> getAll() {
         return list;
     }
 
-    public int getListOfAvionSize() {
+    public int countAll() {
         return list.size();
     }
 

@@ -15,12 +15,12 @@ public class AvionDataProvider extends DataProvider<Avion> {
     private final AeroplaneService aeroplaneService = new AeroplaneServiceImpl();
 
     public Iterator iterator(int first, int count) {
-        List<Avion> listOfAvion = aeroplaneService.getListOfAvion();
+        List<Avion> listOfAvion = aeroplaneService.getAll();
         return listOfAvion.iterator();
     }
 
     public int size() {
-        return aeroplaneService.getListOfAvionSize();
+        return aeroplaneService.countAll();
     }
 
 }

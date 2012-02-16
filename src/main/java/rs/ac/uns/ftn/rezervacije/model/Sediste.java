@@ -2,23 +2,25 @@ package rs.ac.uns.ftn.rezervacije.model;
 
 public class Sediste extends AbstractPersistable {
 
-	private Let let;
-	private Korisnik korisnik;
+    private static final long serialVersionUID = 1624768855800006595L;
 
-	public Let getLet() {
-		return let;
-	}
+    private Let let;
+    private Korisnik korisnik;
 
-	public void setLet(Let let) {
-		this.let = let;
-	}
+    public Let getLet() {
+        return let;
+    }
 
-	public Korisnik getKorisnik() {
-		return korisnik;
-	}
+    public void setLet(Let let) {
+        this.let = let;
+    }
 
-	public void setKorisnik(Korisnik korisnik) {
-		this.korisnik = korisnik;
-	}
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
 
 }

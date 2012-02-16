@@ -3,9 +3,15 @@ package rs.ac.uns.ftn.rezervacije.stranice.admin.avion;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import rs.ac.uns.ftn.rezervacije.model.Avion;
+import rs.ac.uns.ftn.rezervacije.service.AeroplaneService;
+import rs.ac.uns.ftn.rezervacije.service.AeroplaneServiceImpl;
 import rs.ac.uns.ftn.rezervacije.stranice.AbstractRezervacijaPage;
 
 import com.inmethod.grid.DataProviderAdapter;
@@ -18,6 +24,8 @@ public class AvionListaPage extends AbstractRezervacijaPage {
 
     private static final long serialVersionUID = -820528739421089772L;
 
+    private final AeroplaneService aeroplaneService = new AeroplaneServiceImpl();
+
     public AvionListaPage() {
         super();
 
@@ -26,7 +34,31 @@ public class AvionListaPage extends AbstractRezervacijaPage {
         List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Naziv"), Avion.NAZIV),
                 new PropertyColumn(new Model("Kapacitet"), Avion.KAPACITET));
 
-        DataGrid grid = new DefaultDataGrid("grid", new DataProviderAdapter<Avion>(dataProvider), cols);
+        DataGrid grid = new DefaultDataGrid("grid", new DataProviderAdapter<Avion>(dataProvider), cols) {
+
+            private static final long serialVersionUID = -2388101643712962470L;
+
+            @Override
+            protected void onRowClicked(AjaxRequestTarget target, IModel rowModel) {
+                super.onRowClicked(target, rowModel);
+                Avion avion = (Avion) rowModel.getObject();
+                PageParameters parameters = new PageParameters();
+                parameters.add(AvionPage.ID, avion.getId());
+                setResponsePage(AvionPage.class, parameters);
+            }
+        };
         add(grid);
+
+        add(new Link<Void>("add") {
+
+            private static final long serialVersionUID = 4140532042907907057L;
+
+            @Override
+            public void onClick() {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
     }
 }

@@ -2,14 +2,16 @@ package rs.ac.uns.ftn.rezervacije.model;
 
 public class Aerodrom extends AbstractPersistable {
 
-	private String naziv;
+    private static final long serialVersionUID = -946405757513011563L;
 
-	public String getNaziv() {
-		return naziv;
-	}
+    private String naziv;
 
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
 
 }

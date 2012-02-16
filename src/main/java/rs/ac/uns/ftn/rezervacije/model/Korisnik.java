@@ -2,6 +2,8 @@ package rs.ac.uns.ftn.rezervacije.model;
 
 public class Korisnik extends AbstractPersistable {
 
+    private static final long serialVersionUID = 7205369385038938219L;
+
     private String korisnickoIme;
     private String lozinka;
     private String ime;

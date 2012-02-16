@@ -3,7 +3,7 @@ package rs.ac.uns.ftn.rezervacije.model;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-abstract class AbstractPersistable implements Serializable {
+public abstract class AbstractPersistable implements Serializable {
 
     private Long id;
 

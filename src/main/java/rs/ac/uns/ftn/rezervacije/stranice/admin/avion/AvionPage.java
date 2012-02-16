@@ -5,26 +5,42 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.util.string.StringValue;
 
 import rs.ac.uns.ftn.rezervacije.model.Avion;
+import rs.ac.uns.ftn.rezervacije.service.AeroplaneService;
+import rs.ac.uns.ftn.rezervacije.service.AeroplaneServiceImpl;
 import rs.ac.uns.ftn.rezervacije.stranice.AbstractRezervacijaPage;
 
 public class AvionPage extends AbstractRezervacijaPage {
 
     private static final long serialVersionUID = 1L;
 
-    public AvionPage() {
+    private final AeroplaneService aeroplaneService = new AeroplaneServiceImpl();
+
+    // edit
+    public AvionPage(PageParameters parameters) {
         super();
+
         FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 
-        Form<Avion> form = new Form<Avion>("form", new CompoundPropertyModel<Avion>(new Avion())) {
+        final Avion avion;
+        if (parameters == null) {
+            avion = new Avion();
+        } else {
+            // load
+            StringValue stringValue = parameters.get(ID);
+            avion = aeroplaneService.getById(stringValue.toLong());
+        }
+        Form<Avion> form = new Form<Avion>("form", new CompoundPropertyModel<Avion>(avion)) {
 
             private static final long serialVersionUID = 1L;
 
             @Override
             protected void onSubmit() {
-                // TODO Auto-generated method stub
                 super.onSubmit();
+                aeroplaneService.create(avion);
             }
         };
 
@@ -34,6 +50,12 @@ public class AvionPage extends AbstractRezervacijaPage {
         form.add(new Button("submit"));
         add(form);
         add(feedbackPanel);
+    }
+
+    // new
+    public AvionPage() {
+        this(null);
+
     }
 
 }
