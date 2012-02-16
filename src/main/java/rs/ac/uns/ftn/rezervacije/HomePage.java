@@ -14,7 +14,7 @@ public class HomePage extends WebPage {
     public HomePage(final PageParameters parameters) {
         // TODO Add your page's components here
         add(new BookmarkablePageLink<PrijavaPage>("admin-prijava", PrijavaPage.class));
-        add(new BookmarkablePageLink<PrijavaPage>("avioni", AvionListaPage.class));
-        add(new BookmarkablePageLink<PrijavaPage>("avion", AvionPage.class));
+        add(new BookmarkablePageLink<AvionListaPage>("avioni", AvionListaPage.class));
+        add(new BookmarkablePageLink<AvionPage>("avion", AvionPage.class));
     }
 }
