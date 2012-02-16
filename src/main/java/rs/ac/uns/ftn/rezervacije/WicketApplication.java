@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.rezervacije;
 
 import org.apache.wicket.protocol.http.WebApplication;
 
+import rs.ac.uns.ftn.rezervacije.stranice.admin.avion.AvionListaPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.login.PrijavaPage;
 
 /**
@@ -28,6 +29,7 @@ public class WicketApplication extends WebApplication {
 
         mountPage("home", HomePage.class);
         mountPage("admin-prijava", PrijavaPage.class);
+        mountPage("avioni", AvionListaPage.class);
         // add your configuration here
 
         // getApplicationSettings().setInternalErrorPage(ErrorPage.class);

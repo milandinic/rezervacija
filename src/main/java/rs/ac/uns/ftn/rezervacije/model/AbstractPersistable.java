@@ -1,15 +1,27 @@
 package rs.ac.uns.ftn.rezervacije.model;
 
-abstract class AbstractPersistable {
+import java.io.Serializable;
 
-	private Long id;
+@SuppressWarnings("serial")
+abstract class AbstractPersistable implements Serializable {
 
-	public Long getId() {
-		return id;
-	}
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public AbstractPersistable() {
+        super();
+    }
+
+    public AbstractPersistable(Long id) {
+        super();
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }
