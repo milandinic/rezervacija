@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import rs.ac.uns.ftn.rezervacije.model.Korisnik;
 
-public class KorisnikServiceImpl implements KorisnikService, Serializable {
+@Service
+class KorisnikServiceImpl implements KorisnikService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,9 +17,9 @@ public class KorisnikServiceImpl implements KorisnikService, Serializable {
 
     public KorisnikServiceImpl() {
         super();
-        list.add(new Korisnik("Pera", "a", "a", 1L));
-        list.add(new Korisnik("Ana", "b", "b", 2L));
-        list.add(new Korisnik("Ceda", "c", "c", 3L));
+        list.add(new Korisnik(1, "Pera", "Peric", "a", "a"));
+        list.add(new Korisnik(2, "Ana", "Anic", "b", "b"));
+        list.add(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
     }
 
     public void create(Korisnik object) {
@@ -30,7 +33,7 @@ public class KorisnikServiceImpl implements KorisnikService, Serializable {
     }
 
     public Korisnik getById(long id) {
-        return new Korisnik("NOvi", "d", "d", id);
+        return list.get(0);
     }
 
     public List<Korisnik> getAll() {
@@ -39,6 +42,11 @@ public class KorisnikServiceImpl implements KorisnikService, Serializable {
 
     public int countAll() {
         return list.size();
+    }
+
+    public void update(Korisnik object) {
+        // TODO Auto-generated method stub
+
     }
 
 }

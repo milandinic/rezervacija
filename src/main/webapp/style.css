@@ -12,7 +12,38 @@ body {
 	padding: 0;
 }
 
+.forma {
+	background-color: silver;
+	margin: 20px;
+	padding-bottom: 40px !important;
+}
+
+.lista{
+	margin: 20px;
+}
+
+.admin-header{
+	background-color: silver;
+	margin: 20px;
+	padding: 10px;
+}
+.admin-header a{
+	color: black;
+}
+
+.feedbackPanel
+{
+	background-color: gray;
+	color: orange;
+	margin: 20px;
+}
+
 form div div input {
+	left: 200px;
+	position: fixed;
+}
+
+form div div select {
 	left: 200px;
 	position: fixed;
 }

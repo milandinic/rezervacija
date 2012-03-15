@@ -5,17 +5,15 @@
 
 	<display-name>rezervacije</display-name>
 
-	<!--
-		There are three means to configure Wickets configuration mode and they 
-		are tested in the order given.
-		
-		1) A system property: -Dwicket.configuration 
-		2) servlet specific <init-param> 
-		3) context specific <context-param>
-
-		The value might be either "development" (reloading when templates change) or 
+	<!-- There are three means to configure Wickets configuration mode and they 
+		are tested in the order given. 1) A system property: -Dwicket.configuration 
+		2) servlet specific <init-param> 3) context specific <context-param> The 
+		value might be either "development" (reloading when templates change) or 
 		"deployment". If no configuration is found, "development" is the default. -->
-
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:META-INF/spring/applicationContext*.xml</param-value>
+	</context-param>
 	<filter>
 		<filter-name>wicket.rezervacije</filter-name>
 		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
@@ -25,8 +23,22 @@
 		</init-param>
 	</filter>
 
+    <filter>
+        <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
+
 	<filter-mapping>
 		<filter-name>wicket.rezervacije</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+    <filter-mapping>
+        <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>	
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>

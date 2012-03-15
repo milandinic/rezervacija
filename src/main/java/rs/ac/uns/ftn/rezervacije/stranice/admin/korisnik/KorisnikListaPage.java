@@ -28,7 +28,8 @@ public class KorisnikListaPage extends AbstractAdminPage {
         KorisnikDataProvider dataProvider = new KorisnikDataProvider();
 
         List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Ime"), Korisnik.IME),
-                new PropertyColumn(new Model("Korisnicko ime"), Korisnik.KORISNICKO_IME));
+                new PropertyColumn(new Model("Prezime"), Korisnik.PREZIME), new PropertyColumn(new Model(
+                        "Korisnicko ime"), Korisnik.KORISNICKO_IME));
 
         DataGrid grid = new DefaultDataGrid("grid", new DataProviderAdapter<Korisnik>(dataProvider), cols) {
 

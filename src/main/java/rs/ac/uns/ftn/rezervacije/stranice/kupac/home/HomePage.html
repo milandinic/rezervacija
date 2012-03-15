@@ -1,0 +1,50 @@
+<wicket:extend>
+<form wicket:id="form" class="forma">
+	<h1>Prijava</h1>
+	<div>
+		<div>
+			Korisnicko ime: <input type="text" wicket:id="korisnickoIme" />
+		</div>
+		<div>
+			Lozinka: <input type="password" wicket:id="lozinka" />
+		</div>
+		<div>
+			<input wicket:id="submit" type="submit" value="Prijava">
+		</div>
+	</div>
+</form>
+
+<div wicket:id="korisnik">
+<span><span wicket:id="ime"></span>, Dobrodošli</span>&nbsp;<span class="odajva"><a wicket:id="odjava">Odjava</a></span>
+</div> 
+
+<form wicket:id="search" class="forma">
+	<h1>Pretraga</h1>
+	<div>
+		<div>
+			Aerodrom polaska: 
+			<select wicket:id="aerodromPolaska">
+		    </select>
+		</div>
+		<div>
+			Aerodrom dolaska: 
+			<select wicket:id="aerodromDolaska">
+		    </select>
+		</div>	
+		<div>
+			Broj putnika:
+			<select wicket:id="brojPutnika">
+		    </select> 
+		</div>		
+		<div>
+			Povratna karta: <input type="checkbox" wicket:id="povratna" />
+		</div>
+		<div>
+			Poslovna klasa: <input type="checkbox" wicket:id="poslovnaKlasa" />
+		</div>
+		<div>
+			<input wicket:id="submit" type="submit" value="Pretraga">
+		</div>
+	</div>
+</form>
+</wicket:extend>

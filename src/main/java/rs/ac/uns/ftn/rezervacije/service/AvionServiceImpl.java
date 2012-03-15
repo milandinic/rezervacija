@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.ac.uns.ftn.rezervacije.model.Avion;
+import org.springframework.stereotype.Service;
 
-public class AvionServiceImpl implements AvionService, Serializable {
+import rs.ac.uns.ftn.rezervacije.model.Avion;
+import rs.ac.uns.ftn.rezervacije.model.Kompanija;
+
+@Service
+class AvionServiceImpl implements AvionService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,9 +18,12 @@ public class AvionServiceImpl implements AvionService, Serializable {
 
     public AvionServiceImpl() {
         super();
-        list.add(new Avion(100, "Boing 741", 1L));
-        list.add(new Avion(50, "Boing 742", 2L));
-        list.add(new Avion(10, "Boing 747", 3L));
+        Kompanija kompanija = new Kompanija();
+        kompanija.setId(0L);
+        kompanija.setNaziv("Jat");
+        list.add(new Avion(1, kompanija, 100, "boing", "474"));
+        list.add(new Avion(2, kompanija, 200, "boing", "999"));
+        list.add(new Avion(3, kompanija, 100, "boing", "474"));
     }
 
     public void create(Avion object) {
@@ -30,7 +37,7 @@ public class AvionServiceImpl implements AvionService, Serializable {
     }
 
     public Avion getById(long id) {
-        return new Avion(100, "Boing 741", id);
+        return list.get(0);
     }
 
     public List<Avion> getAll() {
@@ -39,6 +46,11 @@ public class AvionServiceImpl implements AvionService, Serializable {
 
     public int countAll() {
         return list.size();
+    }
+
+    public void update(Avion object) {
+        // TODO Auto-generated method stub
+
     }
 
 }

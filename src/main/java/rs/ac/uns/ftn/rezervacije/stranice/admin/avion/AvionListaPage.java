@@ -27,8 +27,9 @@ public class AvionListaPage extends AbstractAdminPage {
 
         AvionDataProvider dataProvider = new AvionDataProvider();
 
-        List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Naziv"), Avion.NAZIV),
-                new PropertyColumn(new Model("Kapacitet"), Avion.KAPACITET));
+        List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Proizvođač"), Avion.PROIZVODJAC),
+                new PropertyColumn(new Model("Model"), Avion.MODEL), new PropertyColumn(new Model("Kapacitet"),
+                        Avion.KAPACITET));
 
         DataGrid grid = new DefaultDataGrid("grid", new DataProviderAdapter<Avion>(dataProvider), cols) {
 

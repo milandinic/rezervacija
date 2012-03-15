@@ -1,27 +1,37 @@
 package rs.ac.uns.ftn.rezervacije.model;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+@Entity
 public class Korisnik extends AbstractPersistable {
 
     public static final String TIP = "tipKorisnika";
-    public static final String IME = "korisnickoIme";
-    public static final String LOZINKA = "ime";
-    public static final String KORISNICKO_IME = "ime";
+    public static final String IME = "ime";
+    public static final String PREZIME = "prezime";
+    public static final String LOZINKA = "lozinka";
+    public static final String KORISNICKO_IME = "korisnickoIme";
 
     private static final long serialVersionUID = 7205369385038938219L;
 
     private String ime;
+    private String prezime;
 
     private String korisnickoIme;
     private String lozinka;
+
+    @Enumerated(EnumType.STRING)
     private TipKorisnika tipKorisnika;
 
     public Korisnik() {
         super();
     }
 
-    public Korisnik(String ime, String korisnickoIme, String lozinka, Long id) {
+    public Korisnik(long id, String ime, String prezime, String korisnickoIme, String lozinka) {
         super(id);
         this.ime = ime;
+        this.prezime = prezime;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
         this.tipKorisnika = TipKorisnika.KUPAC;
@@ -59,4 +69,16 @@ public class Korisnik extends AbstractPersistable {
         this.lozinka = lozinka;
     }
 
+    public String getPrezime() {
+        return prezime;
+    }
+
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
+    }
+
+    @Override
+    public String toString() {
+        return ime;
+    }
 }

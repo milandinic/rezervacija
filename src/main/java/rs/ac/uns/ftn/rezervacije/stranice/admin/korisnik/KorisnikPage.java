@@ -1,23 +1,25 @@
 package rs.ac.uns.ftn.rezervacije.stranice.admin.korisnik;
 
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.string.StringValue;
 
 import rs.ac.uns.ftn.rezervacije.model.Korisnik;
 import rs.ac.uns.ftn.rezervacije.service.KorisnikService;
-import rs.ac.uns.ftn.rezervacije.service.KorisnikServiceImpl;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.AbstractAdminPage;
 
 public class KorisnikPage extends AbstractAdminPage {
 
     private static final long serialVersionUID = 1L;
 
-    private final KorisnikService korisnikService = new KorisnikServiceImpl();
+    @SpringBean
+    private KorisnikService korisnikService;
 
     // edit
     public KorisnikPage(PageParameters parameters) {
@@ -40,12 +42,18 @@ public class KorisnikPage extends AbstractAdminPage {
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-                korisnikService.create(korisnik);
+                if (korisnik.getId() == null) {
+                    korisnikService.create(korisnik);
+                } else {
+                    korisnikService.update(korisnik);
+                }
             }
         };
 
+        form.add(new Label(Korisnik.KORISNICKO_IME));
+
         form.add(new TextField<String>(Korisnik.IME).setRequired(true));
-        form.add(new TextField<String>(Korisnik.KORISNICKO_IME).setRequired(true));
+        form.add(new TextField<String>(Korisnik.PREZIME).setRequired(true));
 
         form.add(new Button("submit"));
         add(form);

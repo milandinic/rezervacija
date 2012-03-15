@@ -6,6 +6,8 @@ import rs.ac.uns.ftn.rezervacije.model.AbstractPersistable;
 
 public interface ICRUD<T extends AbstractPersistable> {
 
+    void update(T object);
+
     void create(T object);
 
     void deleteById(long id);

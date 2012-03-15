@@ -6,18 +6,19 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.string.StringValue;
 
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 import rs.ac.uns.ftn.rezervacije.service.AerodromService;
-import rs.ac.uns.ftn.rezervacije.service.AerodromServiceImpl;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.AbstractAdminPage;
 
 public class AerodromPage extends AbstractAdminPage {
 
     private static final long serialVersionUID = 1L;
 
-    private final AerodromService aerodromService = new AerodromServiceImpl();
+    @SpringBean
+    private AerodromService aerodromService;
 
     // edit
     public AerodromPage(PageParameters parameters) {
@@ -40,11 +41,17 @@ public class AerodromPage extends AbstractAdminPage {
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-                aerodromService.create(avion);
+                if (avion.getId() == null) {
+                    aerodromService.create(avion);
+                } else {
+                    aerodromService.update(avion);
+                }
             }
         };
 
         form.add(new TextField<String>(Aerodrom.NAZIV).setRequired(true));
+        form.add(new TextField<String>(Aerodrom.MESTO).setRequired(true));
+        form.add(new TextField<String>(Aerodrom.SIFRA).setRequired(true));
 
         form.add(new Button("submit"));
         add(form);

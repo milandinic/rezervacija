@@ -1,23 +1,44 @@
 package rs.ac.uns.ftn.rezervacije.model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Avion extends AbstractPersistable {
 
     private static final long serialVersionUID = 1L;
 
     public static String KAPACITET = "kapacitet";
-    public static String NAZIV = "naziv";
+    public static String PROIZVODJAC = "proizvodjac";
+    public static String MODEL = "model";
+
+    @NotNull
+    @ManyToOne
+    private Kompanija kompanija;
 
     private Integer kapacitet;
-    private String naziv;
+    private String proizvodjac;
+    private String model;
 
     public Avion() {
         super();
     }
 
-    public Avion(Integer kapacitet, String naziv, Long id) {
+    public Avion(long id, Kompanija kompanija, Integer kapacitet, String proizvodjac, String model) {
         super(id);
+        this.kompanija = kompanija;
         this.kapacitet = kapacitet;
-        this.naziv = naziv;
+        this.proizvodjac = proizvodjac;
+        this.model = model;
+    }
+
+    public Kompanija getKompanija() {
+        return kompanija;
+    }
+
+    public void setKompanija(Kompanija kompanija) {
+        this.kompanija = kompanija;
     }
 
     public Integer getKapacitet() {
@@ -28,12 +49,24 @@ public class Avion extends AbstractPersistable {
         this.kapacitet = kapacitet;
     }
 
-    public String getNaziv() {
-        return naziv;
+    public String getProizvodjac() {
+        return proizvodjac;
     }
 
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
+    public void setProizvodjac(String proizvodjac) {
+        this.proizvodjac = proizvodjac;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    @Override
+    public String toString() {
+        return kompanija.getNaziv() + " " + proizvodjac + " " + model;
+    }
 }

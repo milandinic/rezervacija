@@ -6,18 +6,19 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.string.StringValue;
 
 import rs.ac.uns.ftn.rezervacije.model.Avion;
 import rs.ac.uns.ftn.rezervacije.service.AvionService;
-import rs.ac.uns.ftn.rezervacije.service.AvionServiceImpl;
-import rs.ac.uns.ftn.rezervacije.stranice.AbstractRezervacijaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.admin.AbstractAdminPage;
 
-public class AvionPage extends AbstractRezervacijaPage {
+public class AvionPage extends AbstractAdminPage {
 
     private static final long serialVersionUID = 1L;
 
-    private final AvionService aeroplaneService = new AvionServiceImpl();
+    @SpringBean
+    private AvionService aeroplaneService;
 
     // edit
     public AvionPage(PageParameters parameters) {
@@ -40,11 +41,16 @@ public class AvionPage extends AbstractRezervacijaPage {
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-                aeroplaneService.create(avion);
+                if (avion.getId() == null) {
+                    aeroplaneService.create(avion);
+                } else {
+                    aeroplaneService.update(avion);
+                }
             }
         };
 
-        form.add(new TextField<String>(Avion.NAZIV).setRequired(true));
+        form.add(new TextField<String>(Avion.MODEL).setRequired(true));
+        form.add(new TextField<String>(Avion.PROIZVODJAC).setRequired(true));
         form.add(new TextField<Integer>(Avion.KAPACITET).setRequired(true));
 
         form.add(new Button("submit"));

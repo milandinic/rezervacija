@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 
-public class AerodromServiceImpl implements AerodromService, Serializable {
+@Service
+class AerodromServiceImpl implements AerodromService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,9 +17,9 @@ public class AerodromServiceImpl implements AerodromService, Serializable {
 
     public AerodromServiceImpl() {
         super();
-        list.add(new Aerodrom("BG", 1L));
-        list.add(new Aerodrom("PG", 2L));
-        list.add(new Aerodrom("SC", 3L));
+        list.add(new Aerodrom(1, "Nikola Tesla", "BEG", "Beograd"));
+        list.add(new Aerodrom(2, "Zanjice", "BEG", "Podgorica"));
+        list.add(new Aerodrom(3, "Schiphol", "SCH", "Amsterdam"));
     }
 
     public void create(Aerodrom object) {
@@ -30,7 +33,7 @@ public class AerodromServiceImpl implements AerodromService, Serializable {
     }
 
     public Aerodrom getById(long id) {
-        return new Aerodrom("Boing 741", id);
+        return list.get(0);
     }
 
     public List<Aerodrom> getAll() {
@@ -39,6 +42,11 @@ public class AerodromServiceImpl implements AerodromService, Serializable {
 
     public int countAll() {
         return list.size();
+    }
+
+    public void update(Aerodrom object) {
+        // TODO Auto-generated method stub
+
     }
 
 }

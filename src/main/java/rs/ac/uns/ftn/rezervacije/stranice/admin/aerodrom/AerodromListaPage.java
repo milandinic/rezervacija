@@ -27,7 +27,9 @@ public class AerodromListaPage extends AbstractAdminPage {
 
         AerodromDataProvider dataProvider = new AerodromDataProvider();
 
-        List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Naziv"), Aerodrom.NAZIV));
+        List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Naziv"), Aerodrom.NAZIV),
+                new PropertyColumn(new Model("Šifra"), Aerodrom.SIFRA), new PropertyColumn(new Model("Mesto"),
+                        Aerodrom.MESTO));
 
         DataGrid grid = new DefaultDataGrid("grid", new DataProviderAdapter<Aerodrom>(dataProvider), cols) {
 
