@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rs.ac.uns.ftn.rezervacije.model.AbstractPersistable;
 
-abstract class BaseDao<T extends AbstractPersistable> implements AbstractDao<T> {
+public abstract class BaseDao<T extends AbstractPersistable> implements AbstractDao<T> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -27,19 +27,25 @@ abstract class BaseDao<T extends AbstractPersistable> implements AbstractDao<T> 
                 .getActualTypeArguments()[0];
     }
 
-    public List<T> findAll() {
-        return entityManager.createQuery("SELECT o FROM " + getClass().getSimpleName() + " o", persistentClass)
+    public List<T> findAll(int first, int count) {
+        return entityManager.createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o", persistentClass)
                 .getResultList();
     }
 
-    public Integer countAll() {
-        return entityManager.createQuery("SELECT count(o) FROM " + getClass().getSimpleName() + " o", Integer.class)
+    public List<T> findAll() {
+        return entityManager.createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o", persistentClass)
+                .getResultList();
+    }
+
+    public Long countAll() {
+        return entityManager.createQuery("SELECT count(o) FROM " + persistentClass.getSimpleName() + " o", Long.class)
                 .getSingleResult();
     }
 
     @Transactional
     public void persist(T object) {
         this.entityManager.persist(object);
+        flush();
     }
 
     public T findById(Long id) {
@@ -50,13 +56,9 @@ abstract class BaseDao<T extends AbstractPersistable> implements AbstractDao<T> 
     }
 
     @Transactional
-    public void remove(T object) {
-        if (this.entityManager.contains(object)) {
-            this.entityManager.remove(object);
-        } else {
-            T attached = findById(object.getId());
-            this.entityManager.remove(attached);
-        }
+    public void remove(long id) {
+        this.entityManager.remove(findById(id));
+        flush();
     }
 
     @Transactional
@@ -72,7 +74,7 @@ abstract class BaseDao<T extends AbstractPersistable> implements AbstractDao<T> 
     @Transactional
     public T merge(T object) {
         T merged = this.entityManager.merge(object);
-        this.entityManager.flush();
+        flush();
         return merged;
     }
 

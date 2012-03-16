@@ -8,11 +8,13 @@ public interface AbstractDao<T extends AbstractPersistable> {
 
     List<T> findAll();
 
-    Integer countAll();
+    Long countAll();
 
     T merge(T object);
 
     void flush();
+
+    void remove(long id);
 
     void clear();
 

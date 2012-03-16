@@ -23,7 +23,7 @@ public class AerodromDataProvider extends DataProvider<Aerodrom> {
     }
 
     public Iterator<Aerodrom> iterator(int first, int count) {
-        List<Aerodrom> listOfAerodrom = aeroplaneService.getAll();
+        List<Aerodrom> listOfAerodrom = aeroplaneService.getAll(first, count);
         return listOfAerodrom.iterator();
     }
 

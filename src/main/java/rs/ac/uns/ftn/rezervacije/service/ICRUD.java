@@ -14,6 +14,8 @@ public interface ICRUD<T extends AbstractPersistable> {
 
     T getById(long id);
 
+    List<T> getAll(int first, int count);
+
     List<T> getAll();
 
     int countAll();

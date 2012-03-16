@@ -47,6 +47,7 @@ public class KorisnikPage extends AbstractAdminPage {
                 } else {
                     korisnikService.update(korisnik);
                 }
+                setResponsePage(KorisnikListaPage.class);
             }
         };
 

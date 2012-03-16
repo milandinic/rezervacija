@@ -46,6 +46,7 @@ public class AvionPage extends AbstractAdminPage {
                 } else {
                     aeroplaneService.update(avion);
                 }
+                setResponsePage(AvionListaPage.class);
             }
         };
 

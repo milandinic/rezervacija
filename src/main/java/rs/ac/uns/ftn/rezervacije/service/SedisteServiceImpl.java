@@ -1,19 +1,21 @@
 package rs.ac.uns.ftn.rezervacije.service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.rezervacije.dao.BaseDao;
+import rs.ac.uns.ftn.rezervacije.dao.SedisteDao;
 import rs.ac.uns.ftn.rezervacije.model.Sediste;
 
 @Service
-class SedisteServiceImpl implements SedisteService, Serializable {
+class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final List<Sediste> list = new ArrayList<Sediste>();
+    @Autowired
+    private SedisteDao sedisteDao;
 
     public SedisteServiceImpl() {
         super();
@@ -32,31 +34,10 @@ class SedisteServiceImpl implements SedisteService, Serializable {
         // list.add(new Sediste(3, let3, null, false));
     }
 
-    public void create(Sediste object) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void deleteById(long id) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public Sediste getById(long id) {
-        return list.get(0);
-    }
-
-    public List<Sediste> getAll() {
-        return list;
-    }
-
-    public int countAll() {
-        return list.size();
-    }
-
-    public void update(Sediste object) {
-        // TODO Auto-generated method stub
-
+    @SuppressWarnings("unchecked")
+    @Override
+    protected BaseDao<Sediste> getDao() {
+        return (BaseDao<Sediste>) sedisteDao;
     }
 
 }

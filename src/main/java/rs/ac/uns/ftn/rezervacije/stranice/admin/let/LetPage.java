@@ -26,7 +26,7 @@ public class LetPage extends AbstractAdminPage {
 
     @SpringBean
     private LetService letService;
-    
+
     @SpringBean
     private AvionService avionService;
 
@@ -59,6 +59,7 @@ public class LetPage extends AbstractAdminPage {
                 } else {
                     letService.update(let);
                 }
+                setResponsePage(LetListaPage.class);
             }
         };
         form.add(new DropDownChoice<Avion>(Let.AVION, avionService.getAll()).setRequired(true));

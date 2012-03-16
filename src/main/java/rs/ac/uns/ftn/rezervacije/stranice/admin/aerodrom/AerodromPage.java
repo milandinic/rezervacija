@@ -26,26 +26,27 @@ public class AerodromPage extends AbstractAdminPage {
 
         FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 
-        final Aerodrom avion;
+        final Aerodrom aerodrom;
         if (parameters == null) {
-            avion = new Aerodrom();
+            aerodrom = new Aerodrom();
         } else {
             // load
             StringValue stringValue = parameters.get(Aerodrom.ID);
-            avion = aerodromService.getById(stringValue.toLong());
+            aerodrom = aerodromService.getById(stringValue.toLong());
         }
-        Form<Aerodrom> form = new Form<Aerodrom>("form", new CompoundPropertyModel<Aerodrom>(avion)) {
+        Form<Aerodrom> form = new Form<Aerodrom>("form", new CompoundPropertyModel<Aerodrom>(aerodrom)) {
 
             private static final long serialVersionUID = 1L;
 
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-                if (avion.getId() == null) {
-                    aerodromService.create(avion);
+                if (aerodrom.getId() == null) {
+                    aerodromService.create(aerodrom);
                 } else {
-                    aerodromService.update(avion);
+                    aerodromService.update(aerodrom);
                 }
+                setResponsePage(AerodromListaPage.class);
             }
         };
 
@@ -61,7 +62,6 @@ public class AerodromPage extends AbstractAdminPage {
     // new
     public AerodromPage() {
         this(null);
-
     }
 
 }
