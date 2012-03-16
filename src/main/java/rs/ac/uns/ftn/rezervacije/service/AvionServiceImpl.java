@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import rs.ac.uns.ftn.rezervacije.model.Avion;
-import rs.ac.uns.ftn.rezervacije.model.Kompanija;
 
 @Service
 class AvionServiceImpl implements AvionService, Serializable {
@@ -18,12 +17,12 @@ class AvionServiceImpl implements AvionService, Serializable {
 
     public AvionServiceImpl() {
         super();
-        Kompanija kompanija = new Kompanija();
-        kompanija.setId(0L);
-        kompanija.setNaziv("Jat");
-        list.add(new Avion(1, kompanija, 100, "boing", "474"));
-        list.add(new Avion(2, kompanija, 200, "boing", "999"));
-        list.add(new Avion(3, kompanija, 100, "boing", "474"));
+        // Kompanija kompanija = new Kompanija();
+        // kompanija.setId(0L);
+        // kompanija.setNaziv("Jat");
+        // list.add(new Avion(1, kompanija, 100, "boing", "474"));
+        // list.add(new Avion(2, kompanija, 200, "boing", "999"));
+        // list.add(new Avion(3, kompanija, 100, "boing", "474"));
     }
 
     public void create(Avion object) {

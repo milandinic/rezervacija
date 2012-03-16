@@ -19,6 +19,10 @@ public class Aerodrom extends AbstractPersistable {
         super();
     }
 
+    public Aerodrom(long id) {
+        super(id);
+    }
+
     public Aerodrom(long id, String naziv, String sifra, String mesto) {
         super(id);
         this.naziv = naziv;

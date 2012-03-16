@@ -17,9 +17,9 @@ class KorisnikServiceImpl implements KorisnikService, Serializable {
 
     public KorisnikServiceImpl() {
         super();
-        list.add(new Korisnik(1, "Pera", "Peric", "a", "a"));
-        list.add(new Korisnik(2, "Ana", "Anic", "b", "b"));
-        list.add(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
+        // list.add(new Korisnik(1, "Pera", "Peric", "a", "a"));
+        // list.add(new Korisnik(2, "Ana", "Anic", "b", "b"));
+        // list.add(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
     }
 
     public void create(Korisnik object) {
