@@ -2,17 +2,14 @@ package rs.ac.uns.ftn.rezervacije.stranice.kupac.home;
 
 import java.util.Arrays;
 
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
@@ -29,40 +26,31 @@ public class HomePage extends AbstractKupacPage {
 
     public HomePage() {
         super();
+        add(new FeedbackPanel("feedback"));
 
-        Form<Kridencijali> form = new Form<Kridencijali>("form", new CompoundPropertyModel<Kridencijali>(
-                new Kridencijali())) {
+        final Kridencijali kridencijali = new Kridencijali();
+        final Form<Kridencijali> form = new Form<Kridencijali>("form", new CompoundPropertyModel<Kridencijali>(
+                kridencijali)) {
             private static final long serialVersionUID = -5022488816884926557L;
 
             @Override
             protected void onSubmit() {
 
-                super.onSubmit();
+                boolean authenticated = RezervacijaSession.getSession().authenticate(kridencijali.getKorisnickoIme(),
+                        kridencijali.getLozinka());
+                if (!authenticated) {
+                    error("Autentifikacija neuspesna");
+                }
+                setVisible(!RezervacijaSession.getSession().isLoggedIn());
             }
         };
 
-        form.add(new TextField<String>(Kridencijali.KORISNICKO_IME));
-        form.add(new PasswordTextField(Kridencijali.LOZINKA).setResetPassword(true));
+        form.add(new TextField<String>(Kridencijali.KORISNICKO_IME).setRequired(true));
+        form.add(new PasswordTextField(Kridencijali.LOZINKA).setResetPassword(true).setRequired(true));
         form.add(new Button("submit"));
         add(form);
 
-        form.setVisible(RezervacijaSession.getSession().getKorisnik() != null);
-        WebMarkupContainer korisnik = new WebMarkupContainer("korisnik");
-        add(korisnik);
-        korisnik.add(new Link<Void>("odjava") {
-
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void onClick() {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
-        korisnik.add(new Label("ime", new PropertyModel<String>(RezervacijaSession.getSession(), "korisnik.ime")));
-
-        korisnik.setVisible(RezervacijaSession.getSession().getKorisnik() == null);
+        form.setVisible(!RezervacijaSession.getSession().isLoggedIn());
 
         Form<Pretraga> search = new Form<Pretraga>("search", new CompoundPropertyModel<Pretraga>(new Pretraga())) {
 
@@ -70,7 +58,10 @@ public class HomePage extends AbstractKupacPage {
 
             @Override
             protected void onSubmit() {
-                // TODO Auto-generated method stub
+                if (!RezervacijaSession.getSession().isLoggedIn()) {
+                    error("Prijava je neophodna.");
+                    return;
+                }
                 super.onSubmit();
             }
         };

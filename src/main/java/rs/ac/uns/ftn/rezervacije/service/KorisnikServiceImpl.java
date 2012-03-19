@@ -17,16 +17,13 @@ class KorisnikServiceImpl extends ICRUDImpl<Korisnik> implements KorisnikService
     @Autowired
     private KorisnikDao korisnikDao;
 
-    public KorisnikServiceImpl() {
-        super();
-        // list.add(new Korisnik(1, "Pera", "Peric", "a", "a"));
-        // list.add(new Korisnik(2, "Ana", "Anic", "b", "b"));
-        // list.add(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
-    }
-
     @Override
     protected AbstractDao<Korisnik> getDao() {
         return korisnikDao;
+    }
+
+    public Korisnik authenticate(String username, String encodedPass) {
+        return korisnikDao.findByIdUsernameAndEncodedPass(username, encodedPass);
     }
 
 }

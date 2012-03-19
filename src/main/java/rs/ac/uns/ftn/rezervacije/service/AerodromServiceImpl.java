@@ -17,13 +17,6 @@ class AerodromServiceImpl extends ICRUDImpl<Aerodrom> implements AerodromService
     @Autowired
     private AerodromDao aerodromDao;
 
-    public AerodromServiceImpl() {
-        super();
-        // new Aerodrom(1, "Nikola Tesla", "BEG", "Beograd").persist();
-        // new Aerodrom(2, "Zanjice", "BEG", "Podgorica").persist();
-        // new Aerodrom(3, "Schiphol", "SCH", "Amsterdam").persist();
-    }
-
     @Override
     protected AbstractDao<Aerodrom> getDao() {
         return aerodromDao;

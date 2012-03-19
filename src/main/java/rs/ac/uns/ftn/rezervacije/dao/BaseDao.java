@@ -13,9 +13,9 @@ import rs.ac.uns.ftn.rezervacije.model.AbstractPersistable;
 public abstract class BaseDao<T extends AbstractPersistable> implements AbstractDao<T> {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
-    private final Class<T> persistentClass;
+    protected final Class<T> persistentClass;
 
     /**
      * Constructor.
@@ -28,13 +28,11 @@ public abstract class BaseDao<T extends AbstractPersistable> implements Abstract
     }
 
     public List<T> findAll(int first, int count) {
-        System.out.println("BaseDao.findAll(range)");
         return entityManager.createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o", persistentClass)
                 .getResultList();
     }
 
     public List<T> findAll() {
-        System.out.println("BaseDao.findAll()");
         return entityManager.createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o", persistentClass)
                 .getResultList();
     }

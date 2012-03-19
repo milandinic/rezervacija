@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import org.h2.security.SHA256;
+
 @Entity
 public class Korisnik extends AbstractPersistable {
 
@@ -33,7 +35,8 @@ public class Korisnik extends AbstractPersistable {
         this.ime = ime;
         this.prezime = prezime;
         this.korisnickoIme = korisnickoIme;
-        this.lozinka = lozinka;
+        byte[] encodedPass = SHA256.getKeyPasswordHash(korisnickoIme, lozinka.toCharArray());
+        this.lozinka = new String(encodedPass);
         this.tipKorisnika = TipKorisnika.KUPAC;
     }
 

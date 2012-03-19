@@ -17,16 +17,6 @@ class AvionServiceImpl extends ICRUDImpl<Avion> implements AvionService, Seriali
     @Autowired
     private AvionDao avionDao;
 
-    public AvionServiceImpl() {
-        super();
-        // Kompanija kompanija = new Kompanija();
-        // kompanija.setId(0L);
-        // kompanija.setNaziv("Jat");
-        // list.add(new Avion(1, kompanija, 100, "boing", "474"));
-        // list.add(new Avion(2, kompanija, 200, "boing", "999"));
-        // list.add(new Avion(3, kompanija, 100, "boing", "474"));
-    }
-
     @Override
     protected AbstractDao<Avion> getDao() {
         return avionDao;

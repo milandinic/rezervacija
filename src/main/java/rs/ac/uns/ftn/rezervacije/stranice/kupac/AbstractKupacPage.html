@@ -1,16 +1,14 @@
 <wicket:extend>
 <div class="admin-header">
 	<div wicket:id="menu">
-	<a wicket:id="avioni">Avioni</a>
-	&nbsp|&nbsp<a wicket:id="aerodromi">Aerodromi</a>
-	&nbsp|&nbsp<a wicket:id="korisnici">Korisnici</a>
-	&nbsp|&nbsp<a wicket:id="letovi">Letovi</a>
+	<a wicket:id="pocetna">Pocetna</a>
 	
-	
-	&nbsp|&nbsp<a wicket:id="licnipodaci">Licni podaci</a>
-	&nbsp|&nbsp<a wicket:id="promenaLozinke">Promena lozinke</a>
-	
-	&nbsp|&nbsp<a href="#">Odjava</a>
+	<wicket:enclosure child="odjava">
+	    Dobrodosli&nbsp<span wicket:id="ime"></span>
+		&nbsp|&nbsp<a wicket:id="licnipodaci">Licni podaci</a>
+		&nbsp|&nbsp<a wicket:id="promenaLozinke">Promena lozinke</a>
+		&nbsp|&nbsp<a wicket:id="odjava">Odjava</a>
+	</wicket:enclosure>
 	</div>
 </div>
 <div class="admin-content">
