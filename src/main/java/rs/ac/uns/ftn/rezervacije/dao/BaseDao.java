@@ -28,11 +28,13 @@ public abstract class BaseDao<T extends AbstractPersistable> implements Abstract
     }
 
     public List<T> findAll(int first, int count) {
+        System.out.println("BaseDao.findAll(range)");
         return entityManager.createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o", persistentClass)
                 .getResultList();
     }
 
     public List<T> findAll() {
+        System.out.println("BaseDao.findAll()");
         return entityManager.createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o", persistentClass)
                 .getResultList();
     }
@@ -44,8 +46,9 @@ public abstract class BaseDao<T extends AbstractPersistable> implements Abstract
 
     @Transactional
     public void persist(T object) {
+        System.out.println("BaseDao.persist()");
         this.entityManager.persist(object);
-        flush();
+        this.entityManager.flush();
     }
 
     public T findById(Long id) {

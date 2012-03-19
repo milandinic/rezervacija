@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.rezervacije.dao.AbstractDao;
 import rs.ac.uns.ftn.rezervacije.dao.AvionDao;
-import rs.ac.uns.ftn.rezervacije.dao.BaseDao;
 import rs.ac.uns.ftn.rezervacije.model.Avion;
 
 @Service
@@ -27,10 +27,9 @@ class AvionServiceImpl extends ICRUDImpl<Avion> implements AvionService, Seriali
         // list.add(new Avion(3, kompanija, 100, "boing", "474"));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected BaseDao<Avion> getDao() {
-        return (BaseDao<Avion>) avionDao;
+    protected AbstractDao<Avion> getDao() {
+        return avionDao;
     }
 
 }

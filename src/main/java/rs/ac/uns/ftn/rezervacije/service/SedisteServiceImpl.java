@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rs.ac.uns.ftn.rezervacije.dao.BaseDao;
+import rs.ac.uns.ftn.rezervacije.dao.AbstractDao;
 import rs.ac.uns.ftn.rezervacije.dao.SedisteDao;
 import rs.ac.uns.ftn.rezervacije.model.Sediste;
 
@@ -36,8 +36,8 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
 
     @SuppressWarnings("unchecked")
     @Override
-    protected BaseDao<Sediste> getDao() {
-        return (BaseDao<Sediste>) sedisteDao;
+    protected AbstractDao<Sediste> getDao() {
+        return (AbstractDao<Sediste>) sedisteDao;
     }
 
 }

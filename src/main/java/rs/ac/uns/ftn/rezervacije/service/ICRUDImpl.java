@@ -2,12 +2,12 @@ package rs.ac.uns.ftn.rezervacije.service;
 
 import java.util.List;
 
-import rs.ac.uns.ftn.rezervacije.dao.BaseDao;
+import rs.ac.uns.ftn.rezervacije.dao.AbstractDao;
 import rs.ac.uns.ftn.rezervacije.model.AbstractPersistable;
 
 abstract class ICRUDImpl<T extends AbstractPersistable> implements ICRUD<T> {
 
-    protected abstract BaseDao<T> getDao();
+    protected abstract AbstractDao<T> getDao();
 
     public void update(T object) {
         getDao().merge(object);

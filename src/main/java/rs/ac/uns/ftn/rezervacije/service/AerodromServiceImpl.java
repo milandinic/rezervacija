@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import rs.ac.uns.ftn.rezervacije.dao.AbstractDao;
 import rs.ac.uns.ftn.rezervacije.dao.AerodromDao;
-import rs.ac.uns.ftn.rezervacije.dao.BaseDao;
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 
 @Service
@@ -24,10 +24,9 @@ class AerodromServiceImpl extends ICRUDImpl<Aerodrom> implements AerodromService
         // new Aerodrom(3, "Schiphol", "SCH", "Amsterdam").persist();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected BaseDao<Aerodrom> getDao() {
-        return ((BaseDao<Aerodrom>) aerodromDao);
+    protected AbstractDao<Aerodrom> getDao() {
+        return aerodromDao;
     }
 
 }

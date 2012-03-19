@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rs.ac.uns.ftn.rezervacije.dao.BaseDao;
+import rs.ac.uns.ftn.rezervacije.dao.AbstractDao;
 import rs.ac.uns.ftn.rezervacije.dao.KorisnikDao;
 import rs.ac.uns.ftn.rezervacije.model.Korisnik;
 
@@ -24,10 +24,9 @@ class KorisnikServiceImpl extends ICRUDImpl<Korisnik> implements KorisnikService
         // list.add(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected BaseDao<Korisnik> getDao() {
-        return (BaseDao<Korisnik>) korisnikDao;
+    protected AbstractDao<Korisnik> getDao() {
+        return korisnikDao;
     }
 
 }

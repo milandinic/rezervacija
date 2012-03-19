@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rs.ac.uns.ftn.rezervacije.dao.BaseDao;
+import rs.ac.uns.ftn.rezervacije.dao.AbstractDao;
 import rs.ac.uns.ftn.rezervacije.dao.LetDao;
 import rs.ac.uns.ftn.rezervacije.model.Let;
 
@@ -30,10 +30,9 @@ class LetServiceImpl extends ICRUDImpl<Let> implements LetService, Serializable 
         // list.add(new Let(3, aerodrom, aerodrom3, avion3, new Date()));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected BaseDao<Let> getDao() {
-        return (BaseDao<Let>) letDao;
+    protected AbstractDao<Let> getDao() {
+        return (AbstractDao<Let>) letDao;
     }
 
 }
