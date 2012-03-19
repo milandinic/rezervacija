@@ -20,6 +20,8 @@ public class Pretraga implements Serializable {
     private Boolean poslovnaKlasa = false;
     private Integer brojPutnika = 1;
 
+    private boolean izvrsena = true;
+
     public Boolean getPovratna() {
         return povratna;
     }
@@ -58,6 +60,14 @@ public class Pretraga implements Serializable {
 
     public void setAerodromDolaska(Aerodrom aerodromDolaska) {
         this.aerodromDolaska = aerodromDolaska;
+    }
+
+    public boolean isIzvrsena() {
+        return izvrsena;
+    }
+
+    public void setIzvrsena(boolean izvrsena) {
+        this.izvrsena = izvrsena;
     }
 
 }

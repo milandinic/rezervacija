@@ -15,7 +15,9 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 import rs.ac.uns.ftn.rezervacije.service.AerodromService;
+import rs.ac.uns.ftn.rezervacije.service.LetService;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.AbstractKupacPage;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.pretraga.LetRezultatiListaPage;
 
 public class HomePage extends AbstractKupacPage {
 
@@ -23,6 +25,9 @@ public class HomePage extends AbstractKupacPage {
 
     @SpringBean
     private AerodromService aerodromService;
+
+    @SpringBean
+    private LetService letService;
 
     public HomePage() {
         super();
@@ -52,7 +57,8 @@ public class HomePage extends AbstractKupacPage {
 
         form.setVisible(!RezervacijaSession.getSession().isLoggedIn());
 
-        Form<Pretraga> search = new Form<Pretraga>("search", new CompoundPropertyModel<Pretraga>(new Pretraga())) {
+        Form<Pretraga> search = new Form<Pretraga>("search", new CompoundPropertyModel<Pretraga>(RezervacijaSession
+                .getSession().getPretraga())) {
 
             private static final long serialVersionUID = 8879620429216322519L;
 
@@ -62,7 +68,8 @@ public class HomePage extends AbstractKupacPage {
                     error("Prijava je neophodna.");
                     return;
                 }
-                super.onSubmit();
+                RezervacijaSession.getSession().getPretraga().setIzvrsena(false);
+                setResponsePage(LetRezultatiListaPage.class);
             }
         };
 
