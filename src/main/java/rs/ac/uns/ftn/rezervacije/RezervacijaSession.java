@@ -7,6 +7,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.h2.security.SHA256;
 
 import rs.ac.uns.ftn.rezervacije.model.Korisnik;
+import rs.ac.uns.ftn.rezervacije.model.TipKorisnika;
 import rs.ac.uns.ftn.rezervacije.service.KorisnikService;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.Pretraga;
 
@@ -40,6 +41,18 @@ public class RezervacijaSession extends WebSession {
         korisnik = korisnikService.authenticate(username, new String(encodedPass));
 
         return korisnik != null;
+    }
+
+    public boolean authenticateAdmin(String username, String password) {
+        byte[] encodedPass = SHA256.getKeyPasswordHash(username, password.toCharArray());
+
+        Korisnik noviKorisnik = korisnikService.authenticate(username, new String(encodedPass));
+        if (noviKorisnik != null && noviKorisnik.getTipKorisnika().equals(TipKorisnika.ADMINISTRATOR)) {
+            korisnik = noviKorisnik;
+            return true;
+        }
+
+        return false;
     }
 
     public void setPretraga(Pretraga pretraga) {

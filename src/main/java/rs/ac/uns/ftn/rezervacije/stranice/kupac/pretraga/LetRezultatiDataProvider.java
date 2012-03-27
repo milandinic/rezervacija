@@ -24,8 +24,7 @@ public class LetRezultatiDataProvider extends DataProvider<Let> {
     }
 
     public Iterator<Let> iterator(int first, int count) {
-        RezervacijaSession.getSession().getPretraga();
-        List<Let> listOfLet = letService.getAll();
+        List<Let> listOfLet = letService.pretragaLetova(RezervacijaSession.getSession().getPretraga());
         return listOfLet.iterator();
     }
 

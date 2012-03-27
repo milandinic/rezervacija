@@ -8,7 +8,6 @@ public class Pretraga implements Serializable {
 
     private static final long serialVersionUID = 7966816711833038152L;
 
-    public static final String POVRATNA = "povratna";
     public static final String POSLOVNA_KLASA = "poslovnaKlasa";
     public static final String BROJ_PUTNIKA = "brojPutnika";
     public static final String AERODROM_POLASKA = "aerodromPolaska";
@@ -16,19 +15,10 @@ public class Pretraga implements Serializable {
 
     private Aerodrom aerodromPolaska;
     private Aerodrom aerodromDolaska;
-    private Boolean povratna = false;
     private Boolean poslovnaKlasa = false;
     private Integer brojPutnika = 1;
 
     private boolean izvrsena = true;
-
-    public Boolean getPovratna() {
-        return povratna;
-    }
-
-    public void setPovratna(Boolean povratna) {
-        this.povratna = povratna;
-    }
 
     public Integer getBrojPutnika() {
         return brojPutnika;

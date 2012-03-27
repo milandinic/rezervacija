@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.rezervacije.service;
 
 import java.io.Serializable;
 
+import org.h2.security.SHA256;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,13 @@ class KorisnikServiceImpl extends ICRUDImpl<Korisnik> implements KorisnikService
 
     public Korisnik authenticate(String username, String encodedPass) {
         return korisnikDao.findByIdUsernameAndEncodedPass(username, encodedPass);
+    }
+
+    public void updatePassword(Korisnik korisnik) {
+        korisnik.setLozinka(new String(SHA256.getKeyPasswordHash(korisnik.getKorisnickoIme(), korisnik.getLozinka()
+                .toCharArray())));
+        korisnikDao.merge(korisnik);
+
     }
 
 }

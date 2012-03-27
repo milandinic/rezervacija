@@ -39,10 +39,9 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
         List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Aerodrom polaska"),
                 Let.AERODROM_POLASKA_NAZIV), new PropertyColumn(new Model("Aerodrom dolaska"),
                 Let.AERODROM_DOLASKA_NAZIV), new PropertyColumn(new Model("Sifra"), Let.SIFRA), new PropertyColumn(
-                new Model("Polazak"), Let.VREME_POLASKA), new PropertyColumn(new Model("Mesta ekonomska"),
-                Let.MESTA_EKONOMSKA), new PropertyColumn(new Model("Mesta poslovna"), Let.MESTA_POSLOVNA),
-                new PropertyColumn(new Model("Cena poslovna"), Let.CENA_POSLOVNA), new PropertyColumn(new Model(
-                        "Cena ekonomska"), Let.CENA_EKONOMSKA));
+                new Model("Mesta ekonomska"), Let.MESTA_EKONOMSKA), new PropertyColumn(new Model("Mesta poslovna"),
+                Let.MESTA_POSLOVNA), new PropertyColumn(new Model("Cena poslovna"), Let.CENA_POSLOVNA),
+                new PropertyColumn(new Model("Cena ekonomska"), Let.CENA_EKONOMSKA));
 
         // List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new
         // Model("Aerodrom polaska"),

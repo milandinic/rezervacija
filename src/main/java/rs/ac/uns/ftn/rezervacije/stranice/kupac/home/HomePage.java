@@ -15,7 +15,6 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 import rs.ac.uns.ftn.rezervacije.service.AerodromService;
-import rs.ac.uns.ftn.rezervacije.service.LetService;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.AbstractKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.pretraga.LetRezultatiListaPage;
 
@@ -25,9 +24,6 @@ public class HomePage extends AbstractKupacPage {
 
     @SpringBean
     private AerodromService aerodromService;
-
-    @SpringBean
-    private LetService letService;
 
     public HomePage() {
         super();
@@ -76,7 +72,6 @@ public class HomePage extends AbstractKupacPage {
         search.add(new DropDownChoice<Aerodrom>(Pretraga.AERODROM_POLASKA, aerodromService.getAll()).setRequired(true));
         search.add(new DropDownChoice<Aerodrom>(Pretraga.AERODROM_DOLASKA, aerodromService.getAll()).setRequired(true));
 
-        search.add(new CheckBox(Pretraga.POVRATNA));
         search.add(new CheckBox(Pretraga.POSLOVNA_KLASA));
         search.add(new DropDownChoice<Integer>(Pretraga.BROJ_PUTNIKA, Arrays.asList(new Integer[] { 1, 2, 3, 4, 5 })));
         search.add(new Button("submit"));

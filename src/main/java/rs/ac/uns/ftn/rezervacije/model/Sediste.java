@@ -1,6 +1,10 @@
 package rs.ac.uns.ftn.rezervacije.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -13,10 +17,15 @@ public class Sediste extends AbstractPersistable {
     @ManyToOne
     private Let let;
 
-    @NotNull
     @ManyToOne
     private Korisnik korisnik;
+
     private boolean placeno;
+
+    @Enumerated(EnumType.STRING)
+    private TipSedista tipSedista;
+
+    private Date datumRezervacije;
 
     public Sediste() {
         super();
@@ -27,6 +36,7 @@ public class Sediste extends AbstractPersistable {
         this.let = let;
         this.korisnik = korisnik;
         this.placeno = placeno;
+        this.tipSedista = TipSedista.EKONOMSKO;
     }
 
     public Let getLet() {
@@ -51,6 +61,22 @@ public class Sediste extends AbstractPersistable {
 
     public void setPlaceno(boolean placeno) {
         this.placeno = placeno;
+    }
+
+    public TipSedista getTipSedista() {
+        return tipSedista;
+    }
+
+    public void setTipSedista(TipSedista tipSedista) {
+        this.tipSedista = tipSedista;
+    }
+
+    public Date getDatumRezervacije() {
+        return datumRezervacije;
+    }
+
+    public void setDatumRezervacije(Date datumRezervacije) {
+        this.datumRezervacije = datumRezervacije;
     }
 
 }

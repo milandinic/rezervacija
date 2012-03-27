@@ -6,4 +6,5 @@ public interface KorisnikService extends ICRUD<Korisnik> {
 
     Korisnik authenticate(String username, String encodedPass);
 
+    void updatePassword(Korisnik korisnik);
 }

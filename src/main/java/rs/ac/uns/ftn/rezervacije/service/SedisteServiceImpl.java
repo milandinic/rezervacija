@@ -1,8 +1,8 @@
 package rs.ac.uns.ftn.rezervacije.service;
 
 import java.io.Serializable;
-
-import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,10 @@ import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 import rs.ac.uns.ftn.rezervacije.model.Avion;
 import rs.ac.uns.ftn.rezervacije.model.Kompanija;
 import rs.ac.uns.ftn.rezervacije.model.Korisnik;
+import rs.ac.uns.ftn.rezervacije.model.Let;
 import rs.ac.uns.ftn.rezervacije.model.Sediste;
+import rs.ac.uns.ftn.rezervacije.model.TipKorisnika;
+import rs.ac.uns.ftn.rezervacije.model.TipSedista;
 
 @Service
 class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, Serializable {
@@ -44,7 +47,7 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
 
     }
 
-    @PostConstruct
+    // @PostConstruct
     void demo() {
         Kompanija kompanija = new Kompanija();
         kompanija.setId(0L);
@@ -72,6 +75,10 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
         korisnikDao.persist(new Korisnik(2, "Ana", "Anic", "b", "b"));
         korisnikDao.persist(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
 
+        Korisnik admin = new Korisnik(4, "Admin", "amic", "ad", "ad");
+        admin.setTipKorisnika(TipKorisnika.ADMINISTRATOR);
+        korisnikDao.persist(admin);
+
     }
 
     @Override
@@ -79,4 +86,14 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
         return sedisteDao;
     }
 
+    public List<Sediste> pretragaSediste(Let let, Korisnik korisnik, int brojSedista, TipSedista tipSedista) {
+        // TODO Auto-generated method stub
+        return new ArrayList<Sediste>();
+    }
+
+    public List<Sediste> rezervisiSediste(Let let, Korisnik korisnik, int brojSedista, TipSedista tipSedista,
+            List<Sediste> sedista) {
+        // TODO Auto-generated method stub
+        return new ArrayList<Sediste>();
+    }
 }

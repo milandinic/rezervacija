@@ -1,7 +1,5 @@
 package rs.ac.uns.ftn.rezervacije.model;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -37,8 +35,6 @@ public class Let extends AbstractPersistable {
     @ManyToOne
     private Avion avion;
 
-    private Date vremePolaska;
-
     private int cenaEkonomska;
     private int cenaPoslovna;
     private int mestaEkonomska;
@@ -49,12 +45,11 @@ public class Let extends AbstractPersistable {
         super();
     }
 
-    public Let(long id, Aerodrom aerodromPolaska, Aerodrom aerodromDolaska, Avion avion, Date vremePolaska) {
+    public Let(long id, Aerodrom aerodromPolaska, Aerodrom aerodromDolaska, Avion avion) {
         super(id);
         this.aerodromPolaska = aerodromPolaska;
         this.aerodromDolaska = aerodromDolaska;
         this.avion = avion;
-        this.vremePolaska = vremePolaska;
     }
 
     public Aerodrom getAerodromPolaska() {
@@ -79,14 +74,6 @@ public class Let extends AbstractPersistable {
 
     public void setAvion(Avion avion) {
         this.avion = avion;
-    }
-
-    public Date getVremePolaska() {
-        return vremePolaska;
-    }
-
-    public void setVremePolaska(Date vremePolaska) {
-        this.vremePolaska = vremePolaska;
     }
 
     public int getCenaEkonomska() {
@@ -131,6 +118,6 @@ public class Let extends AbstractPersistable {
 
     @Override
     public String toString() {
-        return aerodromPolaska.getNaziv() + "-" + aerodromDolaska.getNaziv() + " " + vremePolaska;
+        return aerodromPolaska.getNaziv() + "-" + aerodromDolaska.getNaziv();
     }
 }
