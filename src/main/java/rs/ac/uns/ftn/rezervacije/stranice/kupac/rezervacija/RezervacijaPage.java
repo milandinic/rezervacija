@@ -4,9 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.wicket.RestartResponseAtInterceptPageException;
+import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
+import rs.ac.uns.ftn.rezervacije.model.Let;
 import rs.ac.uns.ftn.rezervacije.model.Sediste;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.AbstractKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.Korak;
@@ -29,6 +33,14 @@ public class RezervacijaPage extends AbstractKupacPage {
             throw new RestartResponseAtInterceptPageException(HomePage.class);
         }
         RezervacijaSession.getSession().setKorak(Korak.NONE);
+
+        WebMarkupContainer container = new WebMarkupContainer("let");
+        container.setDefaultModel(new CompoundPropertyModel<Let>(RezervacijaSession.getSession().getLet()));
+        add(container);
+        container.add(new Label(Let.SIFRA));
+        container.add(new Label(Let.AVION));
+        container.add(new Label(Let.AERODROM_DOLASKA + ".naziv"));
+        container.add(new Label(Let.AERODROM_POLASKA + ".naziv"));
 
         SedistaDataProvider dataProvider = new SedistaDataProvider();
 

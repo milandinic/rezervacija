@@ -3,6 +3,8 @@ package rs.ac.uns.ftn.rezervacije.service;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,12 +43,15 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
     @Autowired
     private KorisnikDao korisnikDao;
 
+    @Autowired
+    private LetService letService;
+
     public SedisteServiceImpl() {
         super();
 
     }
 
-    // @PostConstruct
+    @PostConstruct
     void demo() {
         Kompanija kompanija = new Kompanija();
         kompanija.setId(0L);
@@ -54,21 +59,29 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
 
         kompanijaDao.persist(kompanija);
 
-        avionDao.persist(new Avion(1, kompanija, 100, "boing", "474"));
-        avionDao.persist(new Avion(2, kompanija, 200, "boing", "999"));
-        avionDao.persist(new Avion(3, kompanija, 100, "boing", "474"));
+        Avion avion = new Avion(1, kompanija, 100, "boing", "474");
+        avionDao.persist(avion);
+        Avion avion2 = new Avion(2, kompanija, 200, "boing", "999");
+        avionDao.persist(avion2);
+        Avion avion3 = new Avion(3, kompanija, 100, "boing", "474");
+        avionDao.persist(avion3);
 
-        aerodromDao.persist(new Aerodrom(1, "Nikola Tesla", "BEG", "Beograd"));
-        aerodromDao.persist(new Aerodrom(2, "Zanjice", "BEG", "Podgorica"));
-        aerodromDao.persist(new Aerodrom(3, "Schiphol", "SCH", "Amsterdam"));
+        Aerodrom aerodrom1 = new Aerodrom(1, "Nikola Tesla", "BEG", "Beograd");
+        aerodromDao.persist(aerodrom1);
+        Aerodrom aerodrom2 = new Aerodrom(2, "Zanjice", "BEG", "Podgorica");
+        aerodromDao.persist(aerodrom2);
+        Aerodrom aerodrom3 = new Aerodrom(3, "Schiphol", "SCH", "Amsterdam");
+        aerodromDao.persist(aerodrom3);
 
-        // Let let1 = new Let(1, aerodrom, aerodrom3, avion2, new Date());
-        // Let let2 = new Let(2, aerodrom2, aerodrom, avion, new Date());
-        // Let let3 = new Let(3, aerodrom, aerodrom3, avion3, new Date());
-        //
-        // list.add(new Sediste(1, let1, null, false));
-        // list.add(new Sediste(2, let2, null, false));
-        // list.add(new Sediste(3, let3, null, false));
+        Let let4 = new Let(4, aerodrom1, aerodrom3, avion);
+        Let let1 = new Let(1, aerodrom1, aerodrom3, avion2);
+        Let let3 = new Let(3, aerodrom1, aerodrom3, avion3);
+        Let let2 = new Let(2, aerodrom2, aerodrom1, avion);
+
+        letService.create(let1);
+        letService.create(let2);
+        letService.create(let3);
+        letService.create(let4);
 
         korisnikDao.persist(new Korisnik(1, "Pera", "Peric", "a", "a"));
         korisnikDao.persist(new Korisnik(2, "Ana", "Anic", "b", "b"));

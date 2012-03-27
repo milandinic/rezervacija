@@ -49,6 +49,10 @@ public class Let extends AbstractPersistable {
         super(id);
         this.aerodromPolaska = aerodromPolaska;
         this.aerodromDolaska = aerodromDolaska;
+        this.mestaPoslovna = 10;
+        this.mestaEkonomska = 20;
+        this.cenaPoslovna = 200;
+        this.cenaEkonomska = 100;
         this.avion = avion;
     }
 

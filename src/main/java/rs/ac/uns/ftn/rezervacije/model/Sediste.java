@@ -22,8 +22,6 @@ public class Sediste extends AbstractPersistable {
     @ManyToOne
     private Korisnik korisnik;
 
-    private boolean placeno;
-
     @Enumerated(EnumType.STRING)
     private TipSedista tipSedista;
 
@@ -33,11 +31,10 @@ public class Sediste extends AbstractPersistable {
         super();
     }
 
-    public Sediste(long id, Let let, Korisnik korisnik, boolean placeno) {
+    public Sediste(long id, Let let, Korisnik korisnik) {
         super(id);
         this.let = let;
         this.korisnik = korisnik;
-        this.placeno = placeno;
         this.tipSedista = TipSedista.EKONOMSKO;
     }
 
@@ -55,14 +52,6 @@ public class Sediste extends AbstractPersistable {
 
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
-    }
-
-    public boolean isPlaceno() {
-        return placeno;
-    }
-
-    public void setPlaceno(boolean placeno) {
-        this.placeno = placeno;
     }
 
     public TipSedista getTipSedista() {

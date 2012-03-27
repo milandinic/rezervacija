@@ -11,6 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
 import rs.ac.uns.ftn.rezervacije.model.Let;
+import rs.ac.uns.ftn.rezervacije.model.Sediste;
 import rs.ac.uns.ftn.rezervacije.model.TipSedista;
 import rs.ac.uns.ftn.rezervacije.service.SedisteService;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.AbstractKupacPage;
@@ -58,12 +59,22 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
                 TipSedista tipSedista = RezervacijaSession.getSession().getPretraga().getPoslovnaKlasa() ? TipSedista.POSLOVNO
                         : TipSedista.EKONOMSKO;
 
-                sedisteService.rezervisiSediste((Let) rowModel.getObject(), RezervacijaSession.getSession()
-                        .getKorisnik(), RezervacijaSession.getSession().getPretraga().getBrojPutnika(), tipSedista);
+                List<Sediste> rezervisiSediste = sedisteService.rezervisiSediste((Let) rowModel.getObject(),
+                        RezervacijaSession.getSession().getKorisnik(), RezervacijaSession.getSession().getPretraga()
+                                .getBrojPutnika(), tipSedista);
 
-                RezervacijaSession.getSession().setKorak(Korak.LISTA_LETOVA);
+                RezervacijaSession.getSession().getRezultat().clear();
+                RezervacijaSession.getSession().setLet(null);
 
-                setResponsePage(RezervacijaPage.class);
+                if (rezervisiSediste.isEmpty()) {
+                    // neko je ukrao sedista
+                    setResponsePage(LetRezultatiListaPage.class);
+                } else {
+                    RezervacijaSession.getSession().setLet((Let) rowModel.getObject());
+                    RezervacijaSession.getSession().getRezultat().addAll(rezervisiSediste);
+                    RezervacijaSession.getSession().setKorak(Korak.LISTA_LETOVA);
+                    setResponsePage(RezervacijaPage.class);
+                }
             }
         };
         add(grid);

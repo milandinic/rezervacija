@@ -10,6 +10,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.h2.security.SHA256;
 
 import rs.ac.uns.ftn.rezervacije.model.Korisnik;
+import rs.ac.uns.ftn.rezervacije.model.Let;
 import rs.ac.uns.ftn.rezervacije.model.Sediste;
 import rs.ac.uns.ftn.rezervacije.model.TipKorisnika;
 import rs.ac.uns.ftn.rezervacije.service.KorisnikService;
@@ -24,6 +25,7 @@ public class RezervacijaSession extends WebSession {
     private Korisnik korisnik;
     private Korak korak = Korak.NONE;
 
+    private Let let;
     private final List<Sediste> rezultat = new ArrayList<Sediste>();
 
     @SpringBean
@@ -89,6 +91,14 @@ public class RezervacijaSession extends WebSession {
 
     public List<Sediste> getRezultat() {
         return rezultat;
+    }
+
+    public Let getLet() {
+        return let;
+    }
+
+    public void setLet(Let let) {
+        this.let = let;
     }
 
 }
