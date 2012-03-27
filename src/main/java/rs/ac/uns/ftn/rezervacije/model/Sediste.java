@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Sediste extends AbstractPersistable {
 
+    public static final String TIP_SEDISTA = "tipSedista";
+
     private static final long serialVersionUID = 1624768855800006595L;
 
     @NotNull

@@ -9,8 +9,5 @@ import rs.ac.uns.ftn.rezervacije.model.TipSedista;
 
 public interface SedisteService extends ICRUD<Sediste> {
 
-    List<Sediste> pretragaSediste(Let let, Korisnik korisnik, int brojSedista, TipSedista tipSedista);
-
-    List<Sediste> rezervisiSediste(Let let, Korisnik korisnik, int brojSedista, TipSedista tipSedista,
-            List<Sediste> sedista);
+    List<Sediste> rezervisiSediste(Let let, Korisnik korisnik, Long brojSedista, TipSedista tipSedista);
 }

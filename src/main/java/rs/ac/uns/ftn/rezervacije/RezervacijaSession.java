@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.rezervacije;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.protocol.http.WebSession;
 import org.apache.wicket.request.Request;
@@ -7,8 +10,10 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.h2.security.SHA256;
 
 import rs.ac.uns.ftn.rezervacije.model.Korisnik;
+import rs.ac.uns.ftn.rezervacije.model.Sediste;
 import rs.ac.uns.ftn.rezervacije.model.TipKorisnika;
 import rs.ac.uns.ftn.rezervacije.service.KorisnikService;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.Korak;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.Pretraga;
 
 public class RezervacijaSession extends WebSession {
@@ -17,6 +22,9 @@ public class RezervacijaSession extends WebSession {
 
     private Pretraga pretraga = new Pretraga();
     private Korisnik korisnik;
+    private Korak korak = Korak.NONE;
+
+    private final List<Sediste> rezultat = new ArrayList<Sediste>();
 
     @SpringBean
     private KorisnikService korisnikService;
@@ -69,6 +77,18 @@ public class RezervacijaSession extends WebSession {
 
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
+    }
+
+    public Korak getKorak() {
+        return korak;
+    }
+
+    public void setKorak(Korak korak) {
+        this.korak = korak;
+    }
+
+    public List<Sediste> getRezultat() {
+        return rezultat;
     }
 
 }

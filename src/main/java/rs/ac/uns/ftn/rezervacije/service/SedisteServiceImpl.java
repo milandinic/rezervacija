@@ -1,7 +1,6 @@
 package rs.ac.uns.ftn.rezervacije.service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,14 +85,7 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
         return sedisteDao;
     }
 
-    public List<Sediste> pretragaSediste(Let let, Korisnik korisnik, int brojSedista, TipSedista tipSedista) {
-        // TODO Auto-generated method stub
-        return new ArrayList<Sediste>();
-    }
-
-    public List<Sediste> rezervisiSediste(Let let, Korisnik korisnik, int brojSedista, TipSedista tipSedista,
-            List<Sediste> sedista) {
-        // TODO Auto-generated method stub
-        return new ArrayList<Sediste>();
+    public List<Sediste> rezervisiSediste(Let let, Korisnik korisnik, Long brojSedista, TipSedista tipSedista) {
+        return sedisteDao.rezervisi(let, korisnik, brojSedista, tipSedista);
     }
 }

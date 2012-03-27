@@ -11,11 +11,14 @@ import rs.ac.uns.ftn.rezervacije.AbstractSpringTest;
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 import rs.ac.uns.ftn.rezervacije.model.Avion;
 import rs.ac.uns.ftn.rezervacije.model.Kompanija;
+import rs.ac.uns.ftn.rezervacije.model.Korisnik;
 import rs.ac.uns.ftn.rezervacije.model.Let;
+import rs.ac.uns.ftn.rezervacije.model.Sediste;
+import rs.ac.uns.ftn.rezervacije.model.TipSedista;
 import rs.ac.uns.ftn.rezervacije.service.LetService;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.Pretraga;
 
-public class LetDaoTest extends AbstractSpringTest {
+public class SedisteDaoTest extends AbstractSpringTest {
 
     @Autowired
     private LetDao letDao;
@@ -32,8 +35,19 @@ public class LetDaoTest extends AbstractSpringTest {
     @Autowired
     private AerodromDao aerodromDao;
 
+    @Autowired
+    private SedisteDao sedisteDao;
+
+    @Autowired
+    private KorisnikDao korisnikDao;
+
     @Test
     public void testInsertAndPretraga() {
+
+        Korisnik korisnik = new Korisnik(1, "Pera", "Peric", "a", "a");
+        korisnikDao.persist(korisnik);
+        korisnikDao.persist(new Korisnik(2, "Ana", "Anic", "b", "b"));
+        korisnikDao.persist(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
 
         Kompanija kompanija = new Kompanija();
         kompanija.setNaziv("jat");
@@ -69,12 +83,25 @@ public class LetDaoTest extends AbstractSpringTest {
         Pretraga pretraga = new Pretraga();
         pretraga.setAerodromDolaska(aerodrom1);
         pretraga.setAerodromPolaska(aerodrom2);
-        pretraga.setBrojPutnika(1L);
+        pretraga.setBrojPutnika(2L);
         pretraga.setPoslovnaKlasa(true);
 
         List<Let> list = letDao.findByPretraga(pretraga);
         Assert.assertNotNull(list);
         Assert.assertFalse(list.isEmpty());
 
+        List<Sediste> result = sedisteDao.rezervisi(let, korisnik, 2L, TipSedista.POSLOVNO);
+        Assert.assertNotNull(result);
+        Assert.assertFalse(result.isEmpty());
+        Assert.assertEquals(2, result.size());
+
+        result = sedisteDao.rezervisi(let, korisnik, 4L, TipSedista.POSLOVNO);
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.isEmpty());
+
+        result = sedisteDao.rezervisi(let, korisnik, 3L, TipSedista.POSLOVNO);
+        Assert.assertNotNull(result);
+        Assert.assertFalse(result.isEmpty());
+        Assert.assertEquals(3, result.size());
     }
 }

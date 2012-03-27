@@ -16,15 +16,13 @@ public class Pretraga implements Serializable {
     private Aerodrom aerodromPolaska;
     private Aerodrom aerodromDolaska;
     private Boolean poslovnaKlasa = false;
-    private Integer brojPutnika = 1;
+    private Long brojPutnika = 1L;
 
-    private boolean izvrsena = true;
-
-    public Integer getBrojPutnika() {
+    public Long getBrojPutnika() {
         return brojPutnika;
     }
 
-    public void setBrojPutnika(Integer brojPutnika) {
+    public void setBrojPutnika(Long brojPutnika) {
         this.brojPutnika = brojPutnika;
     }
 
@@ -50,14 +48,6 @@ public class Pretraga implements Serializable {
 
     public void setAerodromDolaska(Aerodrom aerodromDolaska) {
         this.aerodromDolaska = aerodromDolaska;
-    }
-
-    public boolean isIzvrsena() {
-        return izvrsena;
-    }
-
-    public void setIzvrsena(boolean izvrsena) {
-        this.izvrsena = izvrsena;
     }
 
 }

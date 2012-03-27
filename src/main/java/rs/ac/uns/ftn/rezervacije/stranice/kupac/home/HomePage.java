@@ -16,6 +16,7 @@ import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
 import rs.ac.uns.ftn.rezervacije.service.AerodromService;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.AbstractKupacPage;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.Korak;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.pretraga.LetRezultatiListaPage;
 
 public class HomePage extends AbstractKupacPage {
@@ -62,10 +63,17 @@ public class HomePage extends AbstractKupacPage {
             protected void onSubmit() {
                 if (!RezervacijaSession.getSession().isLoggedIn()) {
                     error("Prijava je neophodna.");
+                    RezervacijaSession.getSession().setKorak(Korak.NONE);
                     return;
                 }
-                RezervacijaSession.getSession().getPretraga().setIzvrsena(false);
+                RezervacijaSession.getSession().setKorak(Korak.HOME_PRETRAGA);
                 setResponsePage(LetRezultatiListaPage.class);
+            }
+
+            @Override
+            protected void onError() {
+                super.onError();
+                RezervacijaSession.getSession().setKorak(Korak.NONE);
             }
         };
 
