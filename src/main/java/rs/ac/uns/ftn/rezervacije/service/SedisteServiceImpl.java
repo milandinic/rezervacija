@@ -68,15 +68,15 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
 
         Aerodrom aerodrom1 = new Aerodrom(1, "Nikola Tesla", "BEG", "Beograd");
         aerodromDao.persist(aerodrom1);
-        Aerodrom aerodrom2 = new Aerodrom(2, "Zanjice", "BEG", "Podgorica");
+        Aerodrom aerodrom2 = new Aerodrom(2, "Zanjice", "ZAN", "Podgorica");
         aerodromDao.persist(aerodrom2);
         Aerodrom aerodrom3 = new Aerodrom(3, "Schiphol", "SCH", "Amsterdam");
         aerodromDao.persist(aerodrom3);
 
-        Let let4 = new Let(4, aerodrom1, aerodrom3, avion);
-        Let let1 = new Let(1, aerodrom1, aerodrom3, avion2);
-        Let let3 = new Let(3, aerodrom1, aerodrom3, avion3);
-        Let let2 = new Let(2, aerodrom2, aerodrom1, avion);
+        Let let4 = new Let(4, aerodrom1, aerodrom3, avion, "BS1");
+        Let let1 = new Let(1, aerodrom1, aerodrom3, avion2, "BS2");
+        Let let3 = new Let(3, aerodrom1, aerodrom3, avion3, "BS3");
+        Let let2 = new Let(2, aerodrom2, aerodrom1, avion, "ZB");
 
         letService.create(let1);
         letService.create(let2);

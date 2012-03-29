@@ -43,8 +43,10 @@ class SedisteDaoImpl extends BaseDao<Sediste> implements SedisteDao {
     }
 
     public int countByKorisnik(Korisnik korisnik) {
-        // TODO Auto-generated method stub
-        return 0;
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT count(s) FROM Sediste s WHERE s.korisnik.id = ?1 ");
+        return entityManager.createQuery(sb.toString(), Long.class).setParameter(1, korisnik.getId()).getSingleResult()
+                .intValue();
     }
 
 }

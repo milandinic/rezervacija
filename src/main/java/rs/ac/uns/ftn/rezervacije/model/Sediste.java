@@ -13,6 +13,9 @@ public class Sediste extends AbstractPersistable {
 
     public static final String TIP_SEDISTA = "tipSedista";
     public static final String CENA = "cena";
+    public static final String LET_SIFRA = "let.sifra";
+    public static final String LET_AERODROM_DOLASKA_NAZIV = "let.aerodromDolaska";
+    public static final String LET_AERODROM_POLASKA_NAZIV = "let.aerodromPolaska";
 
     private static final long serialVersionUID = 1624768855800006595L;
 

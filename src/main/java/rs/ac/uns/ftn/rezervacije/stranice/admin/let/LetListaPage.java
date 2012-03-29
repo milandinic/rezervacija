@@ -19,6 +19,8 @@ public class LetListaPage extends AbstractAdminPage {
         LetDataProvider dataProvider = new LetDataProvider();
         SimpleGridCreator<Let> simpleGridCreator = new SimpleGridCreator<Let>() {
 
+            private static final long serialVersionUID = 7490279855734481742L;
+
             @Override
             public void hanldeRowClicked(AjaxRequestTarget target, IModel<Let> rowModel) {
                 Let let = rowModel.getObject();

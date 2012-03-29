@@ -20,6 +20,8 @@ public class KorisnikListaPage extends AbstractAdminPage {
 
         SimpleGridCreator<Korisnik> simpleGridCreator = new SimpleGridCreator<Korisnik>() {
 
+            private static final long serialVersionUID = 1654310009490475636L;
+
             @Override
             public void hanldeRowClicked(AjaxRequestTarget target, IModel<Korisnik> rowModel) {
                 Korisnik avion = rowModel.getObject();

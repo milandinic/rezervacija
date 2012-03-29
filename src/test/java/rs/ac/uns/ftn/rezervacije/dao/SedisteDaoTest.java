@@ -86,7 +86,7 @@ public class SedisteDaoTest extends AbstractSpringTest {
         pretraga.setBrojPutnika(2L);
         pretraga.setPoslovnaKlasa(true);
 
-        List<Let> list = letDao.findByPretraga(pretraga);
+        List<Let> list = letDao.findByPretraga(pretraga, 0, 10);
         Assert.assertNotNull(list);
         Assert.assertFalse(list.isEmpty());
 

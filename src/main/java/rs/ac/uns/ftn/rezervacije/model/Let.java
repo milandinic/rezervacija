@@ -45,7 +45,7 @@ public class Let extends AbstractPersistable {
         super();
     }
 
-    public Let(long id, Aerodrom aerodromPolaska, Aerodrom aerodromDolaska, Avion avion) {
+    public Let(long id, Aerodrom aerodromPolaska, Aerodrom aerodromDolaska, Avion avion, String sifra) {
         super(id);
         this.aerodromPolaska = aerodromPolaska;
         this.aerodromDolaska = aerodromDolaska;
@@ -54,6 +54,7 @@ public class Let extends AbstractPersistable {
         this.cenaPoslovna = 200;
         this.cenaEkonomska = 100;
         this.avion = avion;
+        this.sifra = sifra;
     }
 
     public Aerodrom getAerodromPolaska() {

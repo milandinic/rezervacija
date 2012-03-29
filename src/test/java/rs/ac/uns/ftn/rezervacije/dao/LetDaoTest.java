@@ -72,9 +72,40 @@ public class LetDaoTest extends AbstractSpringTest {
         pretraga.setBrojPutnika(1L);
         pretraga.setPoslovnaKlasa(true);
 
-        List<Let> list = letDao.findByPretraga(pretraga);
+        List<Let> list = letDao.findByPretraga(pretraga, 0, 10);
         Assert.assertNotNull(list);
         Assert.assertFalse(list.isEmpty());
 
+        Assert.assertEquals(1, letDao.countByPretragaLetova(pretraga));
+
+        let = new Let();
+        let.setMestaEkonomska(10);
+        let.setMestaPoslovna(5);
+        let.setCenaEkonomska(100);
+        let.setCenaPoslovna(200);
+        let.setAvion(avion);
+        let.setAerodromDolaska(aerodrom2);
+        let.setAerodromPolaska(aerodrom2);
+        let.setSifra("Sa2");
+        let.setAvion(avion);
+
+        letService.create(let);
+
+        Assert.assertEquals(1, letDao.countByPretragaLetova(pretraga));
+
+        let = new Let();
+        let.setMestaEkonomska(10);
+        let.setMestaPoslovna(5);
+        let.setCenaEkonomska(100);
+        let.setCenaPoslovna(200);
+        let.setAvion(avion);
+        let.setAerodromDolaska(aerodrom1);
+        let.setAerodromPolaska(aerodrom2);
+        let.setSifra("Sa3");
+        let.setAvion(avion);
+
+        letService.create(let);
+
+        Assert.assertEquals(2, letDao.countByPretragaLetova(pretraga));
     }
 }

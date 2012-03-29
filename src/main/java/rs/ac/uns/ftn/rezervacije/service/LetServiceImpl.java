@@ -40,6 +40,7 @@ class LetServiceImpl extends ICRUDImpl<Let> implements LetService, Serializable 
             Sediste sediste = new Sediste();
             sediste.setLet(object);
             sediste.setTipSedista(TipSedista.EKONOMSKO);
+            sediste.setCena(object.getCenaEkonomska());
             sedisteDao.persist(sediste);
         }
 
@@ -48,13 +49,18 @@ class LetServiceImpl extends ICRUDImpl<Let> implements LetService, Serializable 
             Sediste sediste = new Sediste();
             sediste.setLet(object);
             sediste.setTipSedista(TipSedista.POSLOVNO);
+            sediste.setCena(object.getCenaPoslovna());
             sedisteDao.persist(sediste);
         }
 
     }
 
-    public List<Let> pretragaLetova(Pretraga pretraga) {
-        return letDao.findByPretraga(pretraga);
+    public List<Let> pretragaLetova(Pretraga pretraga, int first, int count) {
+        return letDao.findByPretraga(pretraga, first, count);
+    }
+
+    public int countByPretragaLetova(Pretraga pretraga) {
+        return letDao.countByPretragaLetova(pretraga);
     }
 
 }

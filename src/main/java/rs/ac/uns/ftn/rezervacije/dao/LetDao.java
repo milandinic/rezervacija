@@ -7,6 +7,8 @@ import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.Pretraga;
 
 public interface LetDao extends AbstractDao<Let> {
 
-    List<Let> findByPretraga(Pretraga pretraga);
+    List<Let> findByPretraga(Pretraga pretraga, int first, int count);
+
+    int countByPretragaLetova(Pretraga pretraga);
 
 }

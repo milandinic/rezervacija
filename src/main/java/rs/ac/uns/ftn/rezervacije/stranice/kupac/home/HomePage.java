@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.rezervacije.stranice.kupac.home;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -25,6 +26,8 @@ public class HomePage extends AbstractKupacPage {
 
     @SpringBean
     private AerodromService aerodromService;
+
+    private static List<Long> MESTA = Arrays.asList(new Long[] { 1L, 2L, 3L, 4L, 5L });
 
     public HomePage() {
         super();
@@ -81,7 +84,7 @@ public class HomePage extends AbstractKupacPage {
         search.add(new DropDownChoice<Aerodrom>(Pretraga.AERODROM_DOLASKA, aerodromService.getAll()).setRequired(true));
 
         search.add(new CheckBox(Pretraga.POSLOVNA_KLASA));
-        search.add(new DropDownChoice<Integer>(Pretraga.BROJ_PUTNIKA, Arrays.asList(new Integer[] { 1, 2, 3, 4, 5 })));
+        search.add(new DropDownChoice<Long>(Pretraga.BROJ_PUTNIKA, MESTA));
         search.add(new Button("submit"));
         add(search);
     }

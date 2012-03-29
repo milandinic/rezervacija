@@ -24,12 +24,12 @@ public class LetRezultatiDataProvider extends DataProvider<Let> {
     }
 
     public Iterator<Let> iterator(int first, int count) {
-        List<Let> listOfLet = letService.pretragaLetova(RezervacijaSession.getSession().getPretraga());
+        List<Let> listOfLet = letService.pretragaLetova(RezervacijaSession.getSession().getPretraga(), first, count);
         return listOfLet.iterator();
     }
 
     public int size() {
-        return letService.countAll();
+        return letService.countByPretragaLetova(RezervacijaSession.getSession().getPretraga());
     }
 
 }
