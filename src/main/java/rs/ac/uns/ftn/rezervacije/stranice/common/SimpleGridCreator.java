@@ -21,7 +21,8 @@ public class SimpleGridCreator<M> implements Serializable {
     private final List<IGridColumn<DataProviderAdapter<M>, M>> cols = new ArrayList<IGridColumn<DataProviderAdapter<M>, M>>();
 
     public DefaultDataGrid<DataProviderAdapter<M>, M> createGrid(IDataProvider<M> dataProvider) {
-        return new DefaultDataGrid<DataProviderAdapter<M>, M>("grid", new DataProviderAdapter<M>(dataProvider), cols) {
+        DefaultDataGrid<DataProviderAdapter<M>, M> grid = new DefaultDataGrid<DataProviderAdapter<M>, M>("grid",
+                new DataProviderAdapter<M>(dataProvider), cols) {
 
             private static final long serialVersionUID = -6262914251527505026L;
 
@@ -29,7 +30,11 @@ public class SimpleGridCreator<M> implements Serializable {
             protected void onRowClicked(AjaxRequestTarget target, IModel<M> rowModel) {
                 hanldeRowClicked(target, rowModel);
             };
+
         };
+        grid.setRowsPerPage(10);
+
+        return grid;
     }
 
     /**

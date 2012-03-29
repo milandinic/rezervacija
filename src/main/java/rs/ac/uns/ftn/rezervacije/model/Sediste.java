@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 public class Sediste extends AbstractPersistable {
 
     public static final String TIP_SEDISTA = "tipSedista";
+    public static final String CENA = "cena";
 
     private static final long serialVersionUID = 1624768855800006595L;
 
@@ -26,6 +27,8 @@ public class Sediste extends AbstractPersistable {
     private TipSedista tipSedista;
 
     private Date datumRezervacije;
+
+    private int cena;
 
     public Sediste() {
         super();
@@ -68,6 +71,14 @@ public class Sediste extends AbstractPersistable {
 
     public void setDatumRezervacije(Date datumRezervacije) {
         this.datumRezervacije = datumRezervacije;
+    }
+
+    public int getCena() {
+        return cena;
+    }
+
+    public void setCena(int cena) {
+        this.cena = cena;
     }
 
 }
