@@ -33,6 +33,9 @@ public class SimpleGridCreator<M> implements Serializable {
 
         };
         grid.setRowsPerPage(10);
+        // NavigatorLabel navigatorLabel = (NavigatorLabel)
+        // grid.get("navigationLabel");
+        // navigatorLabel
 
         return grid;
     }

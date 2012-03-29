@@ -36,8 +36,8 @@ public class WicketApplication extends WebApplication {
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
         // getMarkupSettings().setStripXmlDeclarationFromOutput(true);
-        getMarkupSettings().setStripWicketTags(true);
-        getMarkupSettings().setStripComments(true);
+        getMarkupSettings().setStripWicketTags(false);
+        getMarkupSettings().setStripComments(false);
 
         // addComponentInstantiationListener(new SpringComponentInjector(this));
 
