@@ -20,8 +20,6 @@ public class AvionListaPage extends AbstractAdminPage {
 
         SimpleGridCreator<Avion> simpleGridCreator = new SimpleGridCreator<Avion>() {
 
-            private static final long serialVersionUID = 6339218124885730536L;
-
             @Override
             public void hanldeRowClicked(AjaxRequestTarget target, IModel<Avion> rowModel) {
                 Avion avion = rowModel.getObject();

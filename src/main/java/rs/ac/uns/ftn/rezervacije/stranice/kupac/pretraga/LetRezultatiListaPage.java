@@ -36,8 +36,6 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
 
         SimpleGridCreator<Let> simpleGridCreator = new SimpleGridCreator<Let>() {
 
-            private static final long serialVersionUID = 4310047496776538500L;
-
             @Override
             public void hanldeRowClicked(AjaxRequestTarget target, IModel<Let> rowModel) {
                 TipSedista tipSedista = RezervacijaSession.getSession().getPretraga().getPoslovnaKlasa() ? TipSedista.POSLOVNO

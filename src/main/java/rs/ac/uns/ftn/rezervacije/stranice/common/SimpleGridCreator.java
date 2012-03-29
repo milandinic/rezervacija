@@ -1,6 +1,5 @@
 package rs.ac.uns.ftn.rezervacije.stranice.common;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +13,12 @@ import com.inmethod.grid.IGridColumn;
 import com.inmethod.grid.column.PropertyColumn;
 import com.inmethod.grid.datagrid.DefaultDataGrid;
 
-public class SimpleGridCreator<M> implements Serializable {
-
-    private static final long serialVersionUID = -2386040291203354716L;
+public class SimpleGridCreator<M> {
 
     private final List<IGridColumn<DataProviderAdapter<M>, M>> cols = new ArrayList<IGridColumn<DataProviderAdapter<M>, M>>();
 
     public DefaultDataGrid<DataProviderAdapter<M>, M> createGrid(IDataProvider<M> dataProvider) {
-        DefaultDataGrid<DataProviderAdapter<M>, M> grid = new DefaultDataGrid<DataProviderAdapter<M>, M>("grid",
-                new DataProviderAdapter<M>(dataProvider), cols) {
+        return new DefaultDataGrid<DataProviderAdapter<M>, M>("grid", new DataProviderAdapter<M>(dataProvider), cols) {
 
             private static final long serialVersionUID = -6262914251527505026L;
 
@@ -30,14 +26,7 @@ public class SimpleGridCreator<M> implements Serializable {
             protected void onRowClicked(AjaxRequestTarget target, IModel<M> rowModel) {
                 hanldeRowClicked(target, rowModel);
             };
-
         };
-        grid.setRowsPerPage(10);
-        // NavigatorLabel navigatorLabel = (NavigatorLabel)
-        // grid.get("navigationLabel");
-        // navigatorLabel
-
-        return grid;
     }
 
     /**
