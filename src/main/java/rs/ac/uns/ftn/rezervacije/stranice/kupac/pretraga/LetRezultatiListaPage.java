@@ -1,12 +1,10 @@
 package rs.ac.uns.ftn.rezervacije.stranice.kupac.pretraga;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
@@ -14,16 +12,11 @@ import rs.ac.uns.ftn.rezervacije.model.Let;
 import rs.ac.uns.ftn.rezervacije.model.Sediste;
 import rs.ac.uns.ftn.rezervacije.model.TipSedista;
 import rs.ac.uns.ftn.rezervacije.service.SedisteService;
+import rs.ac.uns.ftn.rezervacije.stranice.common.SimpleGridCreator;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.AbstractKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.Korak;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.HomePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.rezervacija.RezervacijaPage;
-
-import com.inmethod.grid.DataProviderAdapter;
-import com.inmethod.grid.IGridColumn;
-import com.inmethod.grid.column.PropertyColumn;
-import com.inmethod.grid.datagrid.DataGrid;
-import com.inmethod.grid.datagrid.DefaultDataGrid;
 
 public class LetRezultatiListaPage extends AbstractKupacPage {
 
@@ -41,25 +34,13 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
 
         LetRezultatiDataProvider dataProvider = new LetRezultatiDataProvider();
 
-        List<IGridColumn> cols = (List) Arrays.asList(new PropertyColumn(new Model("Aerodrom polaska"),
-                Let.AERODROM_POLASKA_NAZIV), new PropertyColumn(new Model("Aerodrom dolaska"),
-                Let.AERODROM_DOLASKA_NAZIV), new PropertyColumn(new Model("Sifra"), Let.SIFRA), new PropertyColumn(
-                new Model("Mesta ekonomska"), Let.MESTA_EKONOMSKA), new PropertyColumn(new Model("Mesta poslovna"),
-                Let.MESTA_POSLOVNA), new PropertyColumn(new Model("Cena poslovna"), Let.CENA_POSLOVNA),
-                new PropertyColumn(new Model("Cena ekonomska"), Let.CENA_EKONOMSKA));
-
-        DataGrid grid = new DefaultDataGrid("grid", new DataProviderAdapter<Let>(dataProvider), cols) {
-
-            private static final long serialVersionUID = -2388101643712962470L;
-
+        SimpleGridCreator<Let> simpleGridCreator = new SimpleGridCreator<Let>() {
             @Override
-            protected void onRowClicked(AjaxRequestTarget target, IModel rowModel) {
-                super.onRowClicked(target, rowModel);
-
+            public void hanldeRowClicked(AjaxRequestTarget target, IModel<Let> rowModel) {
                 TipSedista tipSedista = RezervacijaSession.getSession().getPretraga().getPoslovnaKlasa() ? TipSedista.POSLOVNO
                         : TipSedista.EKONOMSKO;
 
-                List<Sediste> rezervisiSediste = sedisteService.rezervisiSediste((Let) rowModel.getObject(),
+                List<Sediste> rezervisiSediste = sedisteService.rezervisiSediste(rowModel.getObject(),
                         RezervacijaSession.getSession().getKorisnik(), RezervacijaSession.getSession().getPretraga()
                                 .getBrojPutnika(), tipSedista);
 
@@ -68,16 +49,26 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
 
                 if (rezervisiSediste.isEmpty()) {
                     // neko je ukrao sedista
+                    // TODO some feedback to user
                     setResponsePage(LetRezultatiListaPage.class);
                 } else {
-                    RezervacijaSession.getSession().setLet((Let) rowModel.getObject());
+                    RezervacijaSession.getSession().setLet(rowModel.getObject());
                     RezervacijaSession.getSession().getRezultat().addAll(rezervisiSediste);
                     RezervacijaSession.getSession().setKorak(Korak.LISTA_LETOVA);
                     setResponsePage(RezervacijaPage.class);
                 }
             }
         };
-        add(grid);
+
+        simpleGridCreator.addColumnItem("Aerodrom polaska", Let.AERODROM_POLASKA_NAZIV);
+        simpleGridCreator.addColumnItem("Aerodrom dolaska", Let.AERODROM_DOLASKA_NAZIV);
+        simpleGridCreator.addColumnItem("Sifra", Let.SIFRA);
+        simpleGridCreator.addColumnItem("Mesta ekonomska", Let.MESTA_EKONOMSKA);
+        simpleGridCreator.addColumnItem("Mesta poslovna", Let.MESTA_POSLOVNA);
+        simpleGridCreator.addColumnItem("Cena ekonomska", Let.CENA_EKONOMSKA);
+        simpleGridCreator.addColumnItem("Cena poslovna", Let.CENA_POSLOVNA);
+
+        add(simpleGridCreator.createGrid(dataProvider));
 
     }
 }
