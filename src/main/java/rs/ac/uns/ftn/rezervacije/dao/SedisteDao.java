@@ -11,4 +11,7 @@ public interface SedisteDao extends AbstractDao<Sediste> {
 
     List<Sediste> rezervisi(Let let, Korisnik korisnik, Long brojSedista, TipSedista tipSedista);
 
+    List<Sediste> findByKorisnik(Korisnik korisnik, int first, int count);
+
+    int countByKorisnik(Korisnik korisnik);
 }

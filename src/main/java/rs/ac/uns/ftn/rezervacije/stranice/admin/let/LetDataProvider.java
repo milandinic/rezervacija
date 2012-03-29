@@ -23,7 +23,7 @@ public class LetDataProvider extends DataProvider<Let> {
     }
 
     public Iterator<Let> iterator(int first, int count) {
-        List<Let> listOfLet = letService.getAll();
+        List<Let> listOfLet = letService.getAll(first, count);
         return listOfLet.iterator();
     }
 

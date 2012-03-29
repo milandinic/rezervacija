@@ -1,19 +1,20 @@
 package rs.ac.uns.ftn.rezervacije.stranice.kupac.istorija;
 
 import rs.ac.uns.ftn.rezervacije.model.Let;
+import rs.ac.uns.ftn.rezervacije.model.Sediste;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.AbstractAdminPage;
 import rs.ac.uns.ftn.rezervacije.stranice.common.SimpleGridCreator;
 
-public class LetListaPage extends AbstractAdminPage {
+public class IstorijaPage extends AbstractAdminPage {
 
     private static final long serialVersionUID = -820528739421089772L;
 
-    public LetListaPage() {
+    public IstorijaPage() {
         super();
 
-        LetDataProvider dataProvider = new LetDataProvider();
+        IstorijaProvider dataProvider = new IstorijaProvider();
 
-        SimpleGridCreator<Let> simpleGridCreator = new SimpleGridCreator<Let>();
+        SimpleGridCreator<Sediste> simpleGridCreator = new SimpleGridCreator<Sediste>();
 
         simpleGridCreator.addColumnItem("Aerodrom polaska", Let.AERODROM_POLASKA_NAZIV);
         simpleGridCreator.addColumnItem("Aerodrom dolaska", Let.AERODROM_DOLASKA_NAZIV);

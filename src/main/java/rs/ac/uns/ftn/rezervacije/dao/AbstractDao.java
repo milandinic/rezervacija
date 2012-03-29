@@ -8,6 +8,8 @@ public interface AbstractDao<T extends AbstractPersistable> {
 
     List<T> findAll();
 
+    List<T> findAll(int first, int count);
+
     Long countAll();
 
     T merge(T object);

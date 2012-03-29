@@ -101,4 +101,12 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
     public List<Sediste> rezervisiSediste(Let let, Korisnik korisnik, Long brojSedista, TipSedista tipSedista) {
         return sedisteDao.rezervisi(let, korisnik, brojSedista, tipSedista);
     }
+
+    public List<Sediste> findByKorisnik(Korisnik korisnik, int first, int count) {
+        return sedisteDao.findByKorisnik(korisnik, first, count);
+    }
+
+    public int countByKorisnik(Korisnik korisnik) {
+        return sedisteDao.countByKorisnik(korisnik);
+    }
 }

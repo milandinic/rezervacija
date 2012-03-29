@@ -29,7 +29,7 @@ public abstract class BaseDao<T extends AbstractPersistable> implements Abstract
 
     public List<T> findAll(int first, int count) {
         return entityManager.createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o", persistentClass)
-                .getResultList();
+                .setFirstResult(first).setMaxResults(count).getResultList();
     }
 
     public List<T> findAll() {

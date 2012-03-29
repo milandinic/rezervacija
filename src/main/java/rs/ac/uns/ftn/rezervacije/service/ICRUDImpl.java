@@ -26,7 +26,7 @@ abstract class ICRUDImpl<T extends AbstractPersistable> implements ICRUD<T> {
     }
 
     public List<T> getAll(int first, int count) {
-        return getDao().findAll();
+        return getDao().findAll(first, count);
     }
 
     public List<T> getAll() {

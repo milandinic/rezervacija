@@ -23,7 +23,7 @@ public class KorisnikDataProvider extends DataProvider<Korisnik> {
     }
 
     public Iterator<Korisnik> iterator(int first, int count) {
-        List<Korisnik> listOfKorisnik = korisnikService.getAll();
+        List<Korisnik> listOfKorisnik = korisnikService.getAll(first, count);
         return listOfKorisnik.iterator();
     }
 
