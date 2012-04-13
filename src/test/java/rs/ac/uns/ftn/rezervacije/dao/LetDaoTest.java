@@ -107,5 +107,9 @@ public class LetDaoTest extends AbstractSpringTest {
         letService.create(let);
 
         Assert.assertEquals(2, letDao.countByPretragaLetova(pretraga));
+
+        List<Let> letovi = letDao.getAllByKompanija(0, 10, kompanija.getId());
+        Assert.assertNotNull(letovi);
+        Assert.assertEquals(3, letovi.size());
     }
 }

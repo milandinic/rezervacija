@@ -27,7 +27,7 @@ public class HomePage extends AbstractKupacPage {
     @SpringBean
     private AerodromService aerodromService;
 
-    private static List<Long> MESTA = Arrays.asList(new Long[] { 1L, 2L, 3L, 4L, 5L });
+    private static final List<Long> MESTA = Arrays.asList(new Long[] { 1L, 2L, 3L, 4L, 5L });
 
     public HomePage() {
         super();

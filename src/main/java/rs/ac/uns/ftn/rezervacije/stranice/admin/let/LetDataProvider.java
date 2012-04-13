@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
 import rs.ac.uns.ftn.rezervacije.model.Let;
 import rs.ac.uns.ftn.rezervacije.service.DataProvider;
 import rs.ac.uns.ftn.rezervacije.service.LetService;
@@ -23,12 +24,14 @@ public class LetDataProvider extends DataProvider<Let> {
     }
 
     public Iterator<Let> iterator(int first, int count) {
-        List<Let> listOfLet = letService.getAll(first, count);
+        List<Let> listOfLet = letService.getAllByKompanija(first, count, RezervacijaSession.getSession().getKorisnik()
+                .getKompanija().getId());
         return listOfLet.iterator();
     }
 
     public int size() {
-        return letService.countAll();
+        return letService.countAllByKompanija(RezervacijaSession.getSession().getKorisnik().getKompanija().getId())
+                .intValue();
     }
 
 }

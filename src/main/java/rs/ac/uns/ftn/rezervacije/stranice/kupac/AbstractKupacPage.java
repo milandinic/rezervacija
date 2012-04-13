@@ -13,9 +13,9 @@ import rs.ac.uns.ftn.rezervacije.model.Korisnik;
 import rs.ac.uns.ftn.rezervacije.model.TipKorisnika;
 import rs.ac.uns.ftn.rezervacije.stranice.AbstractRezervacijaPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.korisnik.KorisnikPage;
-import rs.ac.uns.ftn.rezervacije.stranice.admin.lozinka.PromenaLozinkePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.HomePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.istorija.IstorijaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.lozinka.PromenaLozinkeKupacPage;
 
 public abstract class AbstractKupacPage extends AbstractRezervacijaPage {
 
@@ -45,7 +45,8 @@ public abstract class AbstractKupacPage extends AbstractRezervacijaPage {
         container.add(new BookmarkablePageLink<HomePage>("pocetna", HomePage.class));
         container.add(new BookmarkablePageLink<KorisnikPage>("licnipodaci", KorisnikPage.class, pageParameters));
 
-        container.add(new BookmarkablePageLink<PromenaLozinkePage>("promenaLozinke", PromenaLozinkePage.class));
+        container
+                .add(new BookmarkablePageLink<PromenaLozinkeKupacPage>("promenaLozinke", PromenaLozinkeKupacPage.class));
         container.add(new BookmarkablePageLink<IstorijaPage>("istorija", IstorijaPage.class));
         add(container);
 

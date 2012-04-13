@@ -35,4 +35,18 @@ class LetDaoImpl extends BaseDao<Let> implements LetDao {
                 .setParameter(4, pretraga.getBrojPutnika()).getResultList().size();
     }
 
+    public List<Let> getAllByKompanija(int first, int count, Long kompanijaId) {
+        return entityManager
+                .createQuery("SELECT o FROM " + persistentClass.getSimpleName() + " o WHERE o.avion.kompanija.id = ?1",
+                        persistentClass).setParameter(1, kompanijaId).getResultList();
+    }
+
+    public Long countAllByKompanija(Long kompanijaId) {
+        return entityManager
+                .createQuery(
+                        "SELECT count(o) FROM " + persistentClass.getSimpleName()
+                                + " o WHERE o.avion.kompanija.id = ?1", Long.class).setParameter(1, kompanijaId)
+                .getSingleResult();
+    }
+
 }

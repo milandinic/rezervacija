@@ -66,10 +66,12 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
         simpleGridCreator.addColumnItem("Aerodrom polaska", Let.AERODROM_POLASKA_NAZIV);
         simpleGridCreator.addColumnItem("Aerodrom dolaska", Let.AERODROM_DOLASKA_NAZIV);
         simpleGridCreator.addColumnItem("Sifra", Let.SIFRA);
-        simpleGridCreator.addColumnItem("Mesta ekonomska", Let.MESTA_EKONOMSKA);
-        simpleGridCreator.addColumnItem("Mesta poslovna", Let.MESTA_POSLOVNA);
-        simpleGridCreator.addColumnItem("Cena ekonomska", Let.CENA_EKONOMSKA);
-        simpleGridCreator.addColumnItem("Cena poslovna", Let.CENA_POSLOVNA);
+
+        if (RezervacijaSession.getSession().getPretraga().getPoslovnaKlasa()) {
+            simpleGridCreator.addColumnItem("Cena poslovna", Let.CENA_POSLOVNA);
+        } else {
+            simpleGridCreator.addColumnItem("Cena ekonomska", Let.CENA_EKONOMSKA);
+        }
 
         add(simpleGridCreator.createGrid(dataProvider));
 

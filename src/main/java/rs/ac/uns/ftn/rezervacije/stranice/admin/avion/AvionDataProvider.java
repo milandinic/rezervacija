@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
 import rs.ac.uns.ftn.rezervacije.model.Avion;
 import rs.ac.uns.ftn.rezervacije.service.AvionService;
 import rs.ac.uns.ftn.rezervacije.service.DataProvider;
@@ -23,12 +24,14 @@ public class AvionDataProvider extends DataProvider<Avion> {
     }
 
     public Iterator<Avion> iterator(int first, int count) {
-        List<Avion> listOfAvion = aeroplaneService.getAll(first, count);
+        List<Avion> listOfAvion = aeroplaneService.getAllByCompany(first, count, RezervacijaSession.getSession()
+                .getKorisnik().getKompanija().getId());
         return listOfAvion.iterator();
     }
 
     public int size() {
-        return aeroplaneService.countAll();
+        return aeroplaneService.countAllByKompanija(
+                RezervacijaSession.getSession().getKorisnik().getKompanija().getId()).intValue();
     }
 
 }

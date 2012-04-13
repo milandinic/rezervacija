@@ -54,10 +54,14 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
     @PostConstruct
     void demo() {
         Kompanija kompanija = new Kompanija();
-        kompanija.setId(0L);
         kompanija.setNaziv("Jat");
 
         kompanijaDao.persist(kompanija);
+
+        Kompanija kompanija2 = new Kompanija();
+        kompanija.setNaziv("Lufthans");
+
+        kompanijaDao.persist(kompanija2);
 
         Avion avion = new Avion(1, kompanija, 100, "boing", "474");
         avionDao.persist(avion);
@@ -65,6 +69,9 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
         avionDao.persist(avion2);
         Avion avion3 = new Avion(3, kompanija, 100, "boing", "474");
         avionDao.persist(avion3);
+
+        Avion avion4 = new Avion(1, kompanija2, 100, "boing", "474");
+        avionDao.persist(avion4);
 
         Aerodrom aerodrom1 = new Aerodrom(1, "Nikola Tesla", "BEG", "Beograd");
         aerodromDao.persist(aerodrom1);
@@ -78,18 +85,25 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
         Let let3 = new Let(3, aerodrom1, aerodrom3, avion3, "BS3");
         Let let2 = new Let(2, aerodrom2, aerodrom1, avion, "ZB");
 
+        Let let5 = new Let(5, aerodrom2, aerodrom1, avion4, "ZBH");
+
         letService.create(let1);
         letService.create(let2);
         letService.create(let3);
         letService.create(let4);
+        letService.create(let5);
 
         korisnikDao.persist(new Korisnik(1, "Pera", "Peric", "a", "a"));
         korisnikDao.persist(new Korisnik(2, "Ana", "Anic", "b", "b"));
         korisnikDao.persist(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
 
-        Korisnik admin = new Korisnik(4, "Admin", "amic", "ad", "ad");
+        Korisnik admin = new Korisnik(4, "Admin", "amic", "ad", "ad", kompanija);
         admin.setTipKorisnika(TipKorisnika.ADMINISTRATOR);
         korisnikDao.persist(admin);
+
+        Korisnik admin2 = new Korisnik(4, "Admin", "amic", "ad2", "ad2", kompanija2);
+        admin2.setTipKorisnika(TipKorisnika.ADMINISTRATOR);
+        korisnikDao.persist(admin2);
 
     }
 

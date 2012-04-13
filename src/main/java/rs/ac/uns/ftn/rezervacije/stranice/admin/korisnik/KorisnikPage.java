@@ -1,6 +1,5 @@
 package rs.ac.uns.ftn.rezervacije.stranice.admin.korisnik;
 
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -45,16 +44,24 @@ public class KorisnikPage extends AbstractAdminPage {
                 if (korisnik.getId() == null) {
                     korisnikService.create(korisnik);
                 } else {
-                    korisnikService.update(korisnik);
+                    Korisnik korisnikByKorisnickoIme = korisnikService.getByKorisnickoIme(korisnik.getKorisnickoIme());
+                    if (korisnikByKorisnickoIme == null) {
+                        korisnikService.update(korisnik);
+                    } else if (korisnikByKorisnickoIme.getId().equals(korisnik.getId())) {
+                        korisnikService.update(korisnik);
+                    } else {
+                        error("Korisnicko ime je zauzeto.");
+                        return;
+                    }
+
                 }
                 setResponsePage(KorisnikListaPage.class);
             }
         };
 
-        form.add(new Label(Korisnik.KORISNICKO_IME));
-
         form.add(new TextField<String>(Korisnik.IME).setRequired(true));
         form.add(new TextField<String>(Korisnik.PREZIME).setRequired(true));
+        form.add(new TextField<String>(Korisnik.KORISNICKO_IME).setRequired(true));
 
         form.add(new Button("submit"));
         add(form);

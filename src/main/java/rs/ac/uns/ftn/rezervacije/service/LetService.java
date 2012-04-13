@@ -11,4 +11,8 @@ public interface LetService extends ICRUD<Let> {
 
     int countByPretragaLetova(Pretraga pretraga);
 
+    List<Let> getAllByKompanija(int first, int count, Long kompanijaId);
+
+    Long countAllByKompanija(Long kompanijaId);
+
 }

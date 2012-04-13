@@ -18,6 +18,7 @@ import rs.ac.uns.ftn.rezervacije.stranice.admin.login.PrijavaPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.lozinka.PromenaLozinkePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.HomePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.istorija.IstorijaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.lozinka.PromenaLozinkeKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.pretraga.LetRezultatiListaPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.rezervacija.RezervacijaPage;
 
@@ -41,8 +42,8 @@ public class WicketApplication extends WebApplication {
 
         // addComponentInstantiationListener(new SpringComponentInjector(this));
 
-        mountPage("index.html", HomePage.class);
         mountPage("admin-prijava.html", PrijavaPage.class);
+        mountPage("admin-lozinka.html", PromenaLozinkePage.class);
 
         mountPage("avioni.html", AvionListaPage.class);
         mountPage("avion.html", AvionPage.class);
@@ -53,11 +54,12 @@ public class WicketApplication extends WebApplication {
         mountPage("korisnik.html", KorisnikPage.class);
         mountPage("letovi.html", LetListaPage.class);
         mountPage("let.html", LetPage.class);
+
+        mountPage("index.html", HomePage.class);
         mountPage("rezultat.html", LetRezultatiListaPage.class);
         mountPage("rezervacija.html", RezervacijaPage.class);
         mountPage("istorija.html", IstorijaPage.class);
-
-        mountPage("promena-lozinke", PromenaLozinkePage.class);
+        mountPage("lozinka.html", PromenaLozinkeKupacPage.class);
 
         // add your configuration here
 

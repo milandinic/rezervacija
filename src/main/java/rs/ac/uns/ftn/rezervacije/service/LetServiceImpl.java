@@ -63,4 +63,12 @@ class LetServiceImpl extends ICRUDImpl<Let> implements LetService, Serializable 
         return letDao.countByPretragaLetova(pretraga);
     }
 
+    public List<Let> getAllByKompanija(int first, int count, Long kompanijaId) {
+        return letDao.getAllByKompanija(first, count, kompanijaId);
+    }
+
+    public Long countAllByKompanija(Long kompanijaId) {
+        return letDao.countAllByKompanija(kompanijaId);
+    }
+
 }

@@ -6,4 +6,6 @@ public interface KorisnikDao extends AbstractDao<Korisnik> {
 
     Korisnik findByIdUsernameAndEncodedPass(String username, String encodedPass);
 
+    Korisnik findByKorisnickoIme(String korisnickoIme);
+
 }

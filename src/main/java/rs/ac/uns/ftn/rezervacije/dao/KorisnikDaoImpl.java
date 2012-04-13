@@ -22,4 +22,16 @@ class KorisnikDaoImpl extends BaseDao<Korisnik> implements KorisnikDao {
 
     }
 
+    public Korisnik findByKorisnickoIme(String korisnickoIme) {
+        try {
+            return entityManager
+                    .createQuery(
+                            "SELECT o FROM " + persistentClass.getSimpleName() + " o WHERE o."
+                                    + Korisnik.KORISNICKO_IME + " = ?1", persistentClass)
+                    .setParameter(1, korisnickoIme).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }

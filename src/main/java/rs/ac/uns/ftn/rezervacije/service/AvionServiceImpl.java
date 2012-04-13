@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.rezervacije.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,14 @@ class AvionServiceImpl extends ICRUDImpl<Avion> implements AvionService, Seriali
     @Override
     protected AbstractDao<Avion> getDao() {
         return avionDao;
+    }
+
+    public List<Avion> getAllByCompany(int first, int count, Long kompanijaId) {
+        return avionDao.getAllByCompany(first, count, kompanijaId);
+    }
+
+    public Long countAllByKompanija(Long kompanijaId) {
+        return avionDao.countAllByKompanija(kompanijaId);
     }
 
 }

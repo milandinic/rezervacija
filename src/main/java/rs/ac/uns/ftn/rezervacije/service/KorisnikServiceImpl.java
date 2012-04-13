@@ -34,4 +34,8 @@ class KorisnikServiceImpl extends ICRUDImpl<Korisnik> implements KorisnikService
 
     }
 
+    public Korisnik getByKorisnickoIme(String korisnickoIme) {
+        return korisnikDao.findByKorisnickoIme(korisnickoIme);
+    }
+
 }
