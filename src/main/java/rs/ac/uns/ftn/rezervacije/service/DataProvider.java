@@ -10,8 +10,7 @@ import org.apache.wicket.model.Model;
 public abstract class DataProvider<T extends Serializable> implements IDataProvider<T> {
 
     public void detach() {
-        // TODO Auto-generated method stub
-
+        // override if needed
     }
 
     public IModel<T> model(T object) {

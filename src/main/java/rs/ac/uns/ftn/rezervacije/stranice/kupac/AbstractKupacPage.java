@@ -6,15 +6,13 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
-import rs.ac.uns.ftn.rezervacije.model.Korisnik;
 import rs.ac.uns.ftn.rezervacije.model.TipKorisnika;
 import rs.ac.uns.ftn.rezervacije.stranice.AbstractRezervacijaPage;
-import rs.ac.uns.ftn.rezervacije.stranice.admin.korisnik.KorisnikPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.HomePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.istorija.IstorijaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.licnipodaci.KorisnikKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.lozinka.PromenaLozinkeKupacPage;
 
 public abstract class AbstractKupacPage extends AbstractRezervacijaPage {
@@ -38,12 +36,8 @@ public abstract class AbstractKupacPage extends AbstractRezervacijaPage {
 
         WebMarkupContainer container = new WebMarkupContainer("menu");
 
-        PageParameters pageParameters = new PageParameters();
-        // TODO get from session
-        pageParameters.add(Korisnik.ID, 1);
-
         container.add(new BookmarkablePageLink<HomePage>("pocetna", HomePage.class));
-        container.add(new BookmarkablePageLink<KorisnikPage>("licnipodaci", KorisnikPage.class, pageParameters));
+        container.add(new BookmarkablePageLink<KorisnikKupacPage>("licnipodaci", KorisnikKupacPage.class));
 
         container
                 .add(new BookmarkablePageLink<PromenaLozinkeKupacPage>("promenaLozinke", PromenaLozinkeKupacPage.class));

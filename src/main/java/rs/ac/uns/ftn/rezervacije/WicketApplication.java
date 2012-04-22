@@ -18,6 +18,7 @@ import rs.ac.uns.ftn.rezervacije.stranice.admin.login.PrijavaPage;
 import rs.ac.uns.ftn.rezervacije.stranice.admin.lozinka.PromenaLozinkePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.HomePage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.istorija.IstorijaPage;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.licnipodaci.KorisnikKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.lozinka.PromenaLozinkeKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.potvrda.PotvrdaPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.pretraga.LetRezultatiListaPage;
@@ -62,6 +63,7 @@ public class WicketApplication extends WebApplication {
         mountPage("istorija.html", IstorijaPage.class);
         mountPage("lozinka.html", PromenaLozinkeKupacPage.class);
         mountPage("potvrda.html", PotvrdaPage.class);
+        mountPage("podaci.html", KorisnikKupacPage.class);
 
         // add your configuration here
 
