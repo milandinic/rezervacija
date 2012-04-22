@@ -44,7 +44,6 @@ public abstract class BaseDao<T extends AbstractPersistable> implements Abstract
 
     @Transactional
     public void persist(T object) {
-        System.out.println("BaseDao.persist()");
         this.entityManager.persist(object);
         this.entityManager.flush();
     }

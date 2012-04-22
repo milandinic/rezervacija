@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
@@ -24,12 +25,17 @@ public class HomePage extends AbstractKupacPage {
 
     private static final long serialVersionUID = -5730640245565838705L;
 
+    public static final String ERROR_EXPIRED_REG = "EX";
+    public static final String ERROR_SOLD = "NA";
+
+    public static final String MSG = "M";
+
     @SpringBean
     private AerodromService aerodromService;
 
     private static final List<Long> MESTA = Arrays.asList(new Long[] { 1L, 2L, 3L, 4L, 5L });
 
-    public HomePage() {
+    public HomePage(PageParameters pageParameters) {
         super();
         add(new FeedbackPanel("feedback"));
 
@@ -87,5 +93,9 @@ public class HomePage extends AbstractKupacPage {
         search.add(new DropDownChoice<Long>(Pretraga.BROJ_PUTNIKA, MESTA));
         search.add(new Button("submit"));
         add(search);
+    }
+
+    public HomePage() {
+        this(null);
     }
 }

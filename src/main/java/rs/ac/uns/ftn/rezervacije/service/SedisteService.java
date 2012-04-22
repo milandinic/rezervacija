@@ -17,7 +17,7 @@ public interface SedisteService extends ICRUD<Sediste> {
 
     int ponistiRezervacije(Korisnik korisnik);
 
-    int ponistiRezervacije();
+    void ponistiIstekleRezervacije();
 
     boolean potvrdiRezervacije(Korisnik korisnik, List<Sediste> list);
 }

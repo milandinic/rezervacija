@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -47,6 +49,8 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
     @Autowired
     private LetService letService;
 
+    private static final Logger LOG = Logger.getLogger(SedisteServiceImpl.class);;
+
     public SedisteServiceImpl() {
         super();
 
@@ -54,6 +58,7 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
 
     @PostConstruct
     void demo() {
+
         Kompanija kompanija = new Kompanija();
         kompanija.setNaziv("Jat");
 
@@ -64,7 +69,7 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
 
         kompanijaDao.persist(kompanija2);
 
-        Avion avion = new Avion(1, kompanija, 100, "boing", "474");
+        Avion avion = new Avion(1, kompanija, 2, "boing", "474");
         avionDao.persist(avion);
         Avion avion2 = new Avion(2, kompanija, 200, "boing", "999");
         avionDao.persist(avion2);
@@ -129,8 +134,10 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
         return sedisteDao.ponistiRezervacije(korisnik);
     }
 
-    public int ponistiRezervacije() {
-        return sedisteDao.ponistiIstekleRezervacije();
+    @Scheduled(cron = "0 0/1 * * * ?")
+    public void ponistiIstekleRezervacije() {
+        LOG.info("ponistiIstekleRezervacije");
+        LOG.info("ponisteno rezervacija " + sedisteDao.ponistiIstekleRezervacije());
     }
 
     public boolean potvrdiRezervacije(Korisnik korisnik, List<Sediste> list) {

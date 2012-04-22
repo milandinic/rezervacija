@@ -4,6 +4,7 @@ import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -27,10 +28,12 @@ public class RezervacijaPage extends AbstractKupacPage {
     public RezervacijaPage() {
         super();
 
+        add(new FeedbackPanel("feedback"));
+
         if (!RezervacijaSession.getSession().getKorak().equals(Korak.LISTA_LETOVA)) {
             throw new RestartResponseAtInterceptPageException(HomePage.class);
         }
-        RezervacijaSession.getSession().setKorak(Korak.NONE);
+        RezervacijaSession.getSession().setKorak(Korak.POTVRDA);
 
         WebMarkupContainer container = new WebMarkupContainer("let");
         container.setDefaultModel(new CompoundPropertyModel<Let>(RezervacijaSession.getSession().getLet()));
@@ -55,11 +58,19 @@ public class RezervacijaPage extends AbstractKupacPage {
 
             @Override
             public void onClick() {
-                // TODO Auto-generated method stub
-                sedisteService.potvrdiRezervacije(RezervacijaSession.getSession().getKorisnik(), RezervacijaSession
-                        .getSession().getRezultat());
+                if (!RezervacijaSession.getSession().getKorak().equals(Korak.POTVRDA)) {
+                    throw new RestartResponseAtInterceptPageException(HomePage.class);
+                }
 
-                setResponsePage(PotvrdaPage.class);
+                boolean result = sedisteService.potvrdiRezervacije(RezervacijaSession.getSession().getKorisnik(),
+                        RezervacijaSession.getSession().getRezultat());
+                if (result) {
+                    setResponsePage(PotvrdaPage.class);
+                } else {
+                    error("Vasa rezervacija je istekla. Molim pokrenite pretragu ponovo.");
+                    RezervacijaSession.getSession().setKorak(Korak.NONE);
+                }
+
             }
 
         });
@@ -70,7 +81,7 @@ public class RezervacijaPage extends AbstractKupacPage {
 
             @Override
             public void onClick() {
-
+                RezervacijaSession.getSession().setKorak(Korak.NONE);
                 sedisteService.ponistiRezervacije(RezervacijaSession.getSession().getKorisnik());
                 setResponsePage(HomePage.class);
 

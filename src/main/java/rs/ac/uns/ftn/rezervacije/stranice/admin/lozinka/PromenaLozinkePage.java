@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.rezervacije.stranice.admin.lozinka;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,6 +36,7 @@ public class PromenaLozinkePage extends AbstractAdminPage {
 
             }
         };
+        add(new FeedbackPanel("feedback"));
 
         form.add(new PasswordTextField(Lozinka.LOZINKA).setResetPassword(true).setRequired(true));
         form.add(new PasswordTextField(Lozinka.PONOVOLJENA_LONZINKA).setResetPassword(true).setRequired(true));

@@ -15,7 +15,7 @@ class LetDaoImpl extends BaseDao<Let> implements LetDao {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT distinct o FROM Let o, Sediste s WHERE o.id = s.let.id ");
         sb.append("AND o.aerodromPolaska.id = ?1 AND o.aerodromDolaska.id = ?2 ");
-        sb.append("AND s.korisnik.id is NULL AND s.tipSedista = ?3 group by o.id having count(s.id)> ?4");
+        sb.append("AND s.korisnik.id is NULL AND s.tipSedista = ?3 group by o.id having count(s.id)>= ?4");
         return entityManager.createQuery(sb.toString(), Let.class)
                 .setParameter(1, pretraga.getAerodromPolaska().getId())
                 .setParameter(2, pretraga.getAerodromDolaska().getId())
@@ -27,7 +27,7 @@ class LetDaoImpl extends BaseDao<Let> implements LetDao {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT distinct o FROM Let o, Sediste s WHERE o.id = s.let.id ");
         sb.append("AND o.aerodromPolaska.id = ?1 AND o.aerodromDolaska.id = ?2 ");
-        sb.append("AND s.korisnik.id is NULL AND s.tipSedista = ?3 group by o.id having count(s.id)> ?4");
+        sb.append("AND s.korisnik.id is NULL AND s.tipSedista = ?3 group by o.id having count(s.id)>= ?4");
         return entityManager.createQuery(sb.toString(), Let.class)
                 .setParameter(1, pretraga.getAerodromPolaska().getId())
                 .setParameter(2, pretraga.getAerodromDolaska().getId())

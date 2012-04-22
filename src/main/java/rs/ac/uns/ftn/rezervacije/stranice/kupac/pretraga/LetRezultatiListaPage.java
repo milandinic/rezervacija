@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -28,10 +29,15 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
     public LetRezultatiListaPage() {
         super();
 
+        final FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+        feedbackPanel.setOutputMarkupId(true);
+        add(feedbackPanel);
+
         if (!RezervacijaSession.getSession().getKorak().equals(Korak.HOME_PRETRAGA)) {
             throw new RestartResponseAtInterceptPageException(HomePage.class);
         }
 
+        sedisteService.ponistiRezervacije(RezervacijaSession.getSession().getKorisnik());
         LetRezultatiDataProvider dataProvider = new LetRezultatiDataProvider();
 
         SimpleGridCreator<Let> simpleGridCreator = new SimpleGridCreator<Let>() {
@@ -40,6 +46,10 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
 
             @Override
             public void hanldeRowClicked(AjaxRequestTarget target, IModel<Let> rowModel) {
+                if (!RezervacijaSession.getSession().getKorak().equals(Korak.HOME_PRETRAGA)) {
+                    throw new RestartResponseAtInterceptPageException(HomePage.class);
+                }
+
                 TipSedista tipSedista = RezervacijaSession.getSession().getPretraga().getPoslovnaKlasa() ? TipSedista.POSLOVNO
                         : TipSedista.EKONOMSKO;
 
@@ -51,9 +61,9 @@ public class LetRezultatiListaPage extends AbstractKupacPage {
                 RezervacijaSession.getSession().setLet(null);
 
                 if (rezervisiSediste.isEmpty()) {
-                    // neko je ukrao sedista
-                    // TODO some feedback to user
-                    setResponsePage(LetRezultatiListaPage.class);
+                    LetRezultatiListaPage.this.error("Sedista su upravo prodata. Molim pokrenite pretragu ponovo.");
+                    target.add(feedbackPanel);
+                    RezervacijaSession.getSession().setKorak(Korak.NONE);
                 } else {
                     RezervacijaSession.getSession().setLet(rowModel.getObject());
                     RezervacijaSession.getSession().getRezultat().addAll(rezervisiSediste);

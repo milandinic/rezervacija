@@ -54,6 +54,7 @@ class SedisteDaoImpl extends BaseDao<Sediste> implements SedisteDao {
                 .intValue();
     }
 
+    @Transactional
     public int ponistiRezervacije(Korisnik korisnik) {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE sediste s SET s.korisnik = NULL, s.datum_rezervacije = NULL ");
@@ -61,14 +62,16 @@ class SedisteDaoImpl extends BaseDao<Sediste> implements SedisteDao {
         return entityManager.createNativeQuery(sb.toString()).setParameter(1, korisnik.getId()).executeUpdate();
     }
 
+    @Transactional
     public int ponistiIstekleRezervacije() {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE sediste s SET s.korisnik = NULL, s.datum_rezervacije = NULL ");
         sb.append("WHERE s.prodato = 0 AND s.datum_rezervacije < ?1");
-        return entityManager.createNativeQuery(sb.toString()).setParameter(1, DateUtils.addMinutes(new Date(), -15))
+        return entityManager.createNativeQuery(sb.toString()).setParameter(1, DateUtils.addMinutes(new Date(), -2))
                 .executeUpdate();
     }
 
+    @Transactional
     public int potvrdiRezervacije(Korisnik korisnik) {
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE sediste s SET s.prodato = 1 ");
