@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import rs.ac.uns.ftn.rezervacije.dao.AbstractDao;
 import rs.ac.uns.ftn.rezervacije.dao.AerodromDao;
@@ -122,5 +123,30 @@ class SedisteServiceImpl extends ICRUDImpl<Sediste> implements SedisteService, S
 
     public int countByKorisnik(Korisnik korisnik) {
         return sedisteDao.countByKorisnik(korisnik);
+    }
+
+    public int ponistiRezervacije(Korisnik korisnik) {
+        return sedisteDao.ponistiRezervacije(korisnik);
+    }
+
+    public int ponistiRezervacije() {
+        return sedisteDao.ponistiIstekleRezervacije();
+    }
+
+    public boolean potvrdiRezervacije(Korisnik korisnik, List<Sediste> list) {
+        Assert.notEmpty(list);
+        int result = sedisteDao.potvrdiRezervacije(korisnik);
+        if (result == list.size()) {
+            return true;
+        } else {
+            for (Sediste sediste : list) {
+                Sediste dbSediste = sedisteDao.findById(sediste.getId());
+                dbSediste.setKorisnik(null);
+                dbSediste.setProdato(false);
+                dbSediste.setDatumRezervacije(null);
+                sedisteDao.merge(dbSediste);
+            }
+            return false;
+        }
     }
 }

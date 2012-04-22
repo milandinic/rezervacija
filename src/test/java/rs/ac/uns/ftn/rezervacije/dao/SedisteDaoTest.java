@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.rezervacije.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -103,5 +104,75 @@ public class SedisteDaoTest extends AbstractSpringTest {
         Assert.assertNotNull(result);
         Assert.assertFalse(result.isEmpty());
         Assert.assertEquals(3, result.size());
+
+        Assert.assertEquals(5, sedisteDao.ponistiRezervacije(korisnik));
+        Assert.assertEquals(0, sedisteDao.ponistiIstekleRezervacije());
+    }
+
+    @Test
+    public void testPotvrdiRezervacije() {
+
+        Korisnik korisnik = new Korisnik(1, "Pera", "Peric", "a", "a");
+        korisnikDao.persist(korisnik);
+        Korisnik korisnik2 = new Korisnik(2, "Ana", "Anic", "b", "b");
+        korisnikDao.persist(korisnik2);
+        korisnikDao.persist(new Korisnik(3, "Ceda", "Cedic", "c", "c"));
+
+        Kompanija kompanija = new Kompanija();
+        kompanija.setNaziv("jat");
+        kompanijaDao.persist(kompanija);
+
+        Aerodrom aerodrom1 = new Aerodrom(1, "Nikola Tesla", "BEG", "Beograd");
+        aerodromDao.persist(aerodrom1);
+        Aerodrom aerodrom2 = new Aerodrom(2, "Zanjice", "BEG", "Podgorica");
+        aerodromDao.persist(aerodrom2);
+        Aerodrom aerodrom3 = new Aerodrom(3, "Schiphol", "SCH", "Amsterdam");
+        aerodromDao.persist(aerodrom3);
+
+        Avion avion = new Avion();
+        avion.setKapacitet(100);
+        avion.setModel("747");
+        avion.setKompanija(kompanija);
+        avion.setProizvodjac("boing");
+        avionDao.persist(avion);
+
+        Let let = new Let();
+        let.setMestaEkonomska(10);
+        let.setMestaPoslovna(5);
+        let.setCenaEkonomska(100);
+        let.setCenaPoslovna(200);
+        let.setAvion(avion);
+        let.setAerodromDolaska(aerodrom1);
+        let.setAerodromPolaska(aerodrom2);
+        let.setSifra("Sa1");
+        let.setAvion(avion);
+
+        letService.create(let);
+
+        Sediste sediste = new Sediste();
+        sediste.setDatumRezervacije(new Date());
+        sediste.setKorisnik(korisnik);
+        sediste.setLet(let);
+        sediste.setProdato(false);
+        sediste.setCena(100);
+        sedisteDao.persist(sediste);
+
+        Sediste sediste2 = new Sediste();
+        sediste2.setDatumRezervacije(new Date());
+        sediste2.setKorisnik(korisnik);
+        sediste2.setLet(let);
+        sediste2.setProdato(true);
+        sediste2.setCena(100);
+        sedisteDao.persist(sediste2);
+
+        Sediste sediste3 = new Sediste();
+        sediste3.setDatumRezervacije(new Date());
+        sediste3.setKorisnik(korisnik2);
+        sediste3.setLet(let);
+        sediste3.setProdato(false);
+        sediste3.setCena(100);
+        sedisteDao.persist(sediste3);
+
+        Assert.assertEquals(1, sedisteDao.potvrdiRezervacije(korisnik));
     }
 }

@@ -14,4 +14,10 @@ public interface SedisteService extends ICRUD<Sediste> {
     List<Sediste> findByKorisnik(Korisnik korisnik, int first, int count);
 
     int countByKorisnik(Korisnik korisnik);
+
+    int ponistiRezervacije(Korisnik korisnik);
+
+    int ponistiRezervacije();
+
+    boolean potvrdiRezervacije(Korisnik korisnik, List<Sediste> list);
 }

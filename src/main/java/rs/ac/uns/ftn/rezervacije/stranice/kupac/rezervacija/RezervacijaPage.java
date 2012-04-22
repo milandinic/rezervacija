@@ -3,20 +3,26 @@ package rs.ac.uns.ftn.rezervacije.stranice.kupac.rezervacija;
 import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import rs.ac.uns.ftn.rezervacije.RezervacijaSession;
 import rs.ac.uns.ftn.rezervacije.model.Let;
 import rs.ac.uns.ftn.rezervacije.model.Sediste;
+import rs.ac.uns.ftn.rezervacije.service.SedisteService;
 import rs.ac.uns.ftn.rezervacije.stranice.common.SimpleGridCreator;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.AbstractKupacPage;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.Korak;
 import rs.ac.uns.ftn.rezervacije.stranice.kupac.home.HomePage;
+import rs.ac.uns.ftn.rezervacije.stranice.kupac.potvrda.PotvrdaPage;
 
 public class RezervacijaPage extends AbstractKupacPage {
 
     private static final long serialVersionUID = -1550978776316588651L;
+
+    @SpringBean
+    private SedisteService sedisteService;
 
     public RezervacijaPage() {
         super();
@@ -43,7 +49,35 @@ public class RezervacijaPage extends AbstractKupacPage {
 
         add(simpleGridCreator.createGrid(dataProvider));
 
-        add(new BookmarkablePageLink<HomePage>("homePage", HomePage.class));
+        add(new Link<Void>("potvrda") {
+
+            private static final long serialVersionUID = 6045767308930551472L;
+
+            @Override
+            public void onClick() {
+                // TODO Auto-generated method stub
+                sedisteService.potvrdiRezervacije(RezervacijaSession.getSession().getKorisnik(), RezervacijaSession
+                        .getSession().getRezultat());
+
+                setResponsePage(PotvrdaPage.class);
+            }
+
+        });
+
+        add(new Link<Void>("odustani") {
+
+            private static final long serialVersionUID = 6366304945881455953L;
+
+            @Override
+            public void onClick() {
+
+                sedisteService.ponistiRezervacije(RezervacijaSession.getSession().getKorisnik());
+                setResponsePage(HomePage.class);
+
+            }
+
+        });
+
     }
 
 }

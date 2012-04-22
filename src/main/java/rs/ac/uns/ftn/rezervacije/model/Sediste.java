@@ -26,8 +26,10 @@ public class Sediste extends AbstractPersistable {
     @ManyToOne
     private Korisnik korisnik;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private TipSedista tipSedista;
+
+    private boolean prodato;
 
     private Date datumRezervacije;
 
@@ -82,6 +84,14 @@ public class Sediste extends AbstractPersistable {
 
     public void setCena(int cena) {
         this.cena = cena;
+    }
+
+    public boolean isProdato() {
+        return prodato;
+    }
+
+    public void setProdato(boolean prodato) {
+        this.prodato = prodato;
     }
 
 }

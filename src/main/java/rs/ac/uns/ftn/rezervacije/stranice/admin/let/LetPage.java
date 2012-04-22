@@ -9,7 +9,6 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.string.StringValue;
-import org.apache.wicket.validation.validator.MaximumValidator;
 import org.apache.wicket.validation.validator.StringValidator.MaximumLengthValidator;
 
 import rs.ac.uns.ftn.rezervacije.model.Aerodrom;
@@ -54,12 +53,19 @@ public class LetPage extends AbstractAdminPage {
             @Override
             protected void onSubmit() {
                 super.onSubmit();
-                if (let.getId() == null) {
-                    letService.create(let);
+
+                if (let.getMestaEkonomska() + let.getMestaPoslovna() == let.getAvion().getKapacitet()) {
+                    if (let.getId() == null) {
+                        letService.create(let);
+                    } else {
+                        letService.update(let);
+                    }
+                    setResponsePage(LetListaPage.class);
                 } else {
-                    letService.update(let);
+                    error("Broj poslovnih i ekonimskih mesta mora biti jedna kapacitetu aviona.("
+                            + let.getAvion().getKapacitet() + ")");
                 }
-                setResponsePage(LetListaPage.class);
+
             }
         };
         form.add(new DropDownChoice<Avion>(Let.AVION, avionService.getAll()).setRequired(true));
@@ -69,8 +75,8 @@ public class LetPage extends AbstractAdminPage {
         form.add(new TextField<Integer>(Let.CENA_EKONOMSKA).setRequired(true));
         form.add(new TextField<Integer>(Let.CENA_POSLOVNA).setRequired(true));
 
-        form.add(new TextField<Integer>(Let.MESTA_EKONOMSKA).setRequired(true).add(new MaximumValidator<Integer>(10)));
-        form.add(new TextField<Integer>(Let.MESTA_POSLOVNA).setRequired(true).add(new MaximumValidator<Integer>(10)));
+        form.add(new TextField<Integer>(Let.MESTA_EKONOMSKA).setRequired(true).setEnabled(let.getId() == null));
+        form.add(new TextField<Integer>(Let.MESTA_POSLOVNA).setRequired(true).setEnabled(let.getId() == null));
 
         form.add(new TextField<String>(Let.SIFRA).setRequired(true).add(new MaximumLengthValidator(10)));
 
